@@ -33,6 +33,7 @@ class TypeController extends Controller
         $getAllType = $model->selectAllType();
         $getAllSize = $model->select_AllSize();
         $loadSliderProduct_Sale_New = $model->select_WrapperProduct();
+       // $selectMaxPrice = $model->selectMaxPrice();
         //$product  = $model->select_Menu_productlv1($alias , $position,$qty);
         $type_Menu     = $model->getNameMenu($alias);
         $product       = $model->select_Menu_productlv2($alias, $position, $qty);
@@ -53,7 +54,8 @@ class TypeController extends Controller
             'pager'    => $pager,
             'allType'  => $getAllType,
             'getAllSize'=>$getAllSize,
-            'getNew_Sale'=>$loadSliderProduct_Sale_New
+            'getNew_Sale'=>$loadSliderProduct_Sale_New,
+          //  'selectMaxPrice'=>$selectMaxPrice
         ];
         return $this->loadView('type', $data, 'Sản Phẩm');
     }
@@ -79,6 +81,18 @@ class TypeController extends Controller
         ];
        // return $this->loadView('type' , $d*ata);
        return $this->loadViewAjax('ajax-allsize',$data);
+    }
+    function loadPrice_Ajax(){
+        $minPrice = $_POST['minPrice'];
+        $maxPrice  = $_POST['maxPrice'];
+        $model =  new TypeModel();
+        $selectPrice = $model->selectMaxPrice($minPrice , $maxPrice);
+        $data = [
+            'minPrice'=>$minPrice ,
+            'maxPrice'=> $maxPrice,
+            'selectPrice'=>$selectPrice
+        ];
+        return  $this->loadViewAjax('ajax-price' ,$data);
     }
 }
 

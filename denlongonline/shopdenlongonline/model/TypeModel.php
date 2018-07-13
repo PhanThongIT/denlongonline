@@ -81,7 +81,7 @@ class TypeModel extends DBConnect
     }
 
     function Filter_Size($id_Size){
-        $sql  ="SELECT products.* , size.*, page_url.*
+        $sql  ="SELECT products.* , size.*, page_url.url
         FROM products , size,page_url
         WHERE products.size = size.id_size AND size.id_size = $id_Size
          AND  page_url.id = products.id_url
@@ -96,6 +96,12 @@ class TypeModel extends DBConnect
         ORDER BY products.price DESC 
         LIMIT 0,5
         ";
+        return $this->loadMoreRows($sql);
+    }
+    function selectMaxPrice($minPrice , $maxPrice){
+        $sql ="SELECT products.* , size.name_size, page_url.url FROM page_url,products , size
+              WHERE products.size = size.id_size and products.id_url = page_url.id AND products.price > $minPrice AND products.price < $maxPrice
+              GROUP BY products.price DESC";
         return $this->loadMoreRows($sql);
     }
 }

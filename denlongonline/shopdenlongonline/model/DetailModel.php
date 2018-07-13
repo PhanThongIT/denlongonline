@@ -32,6 +32,12 @@ class DetailModel extends DBConnect
                 AND p.id != $id ";
         return $this->loadMoreRows($sql);
     }
+    function findProductByID($idProduct){
+        $sql ="SELECT products.*  ,  size.name_size ,page_url.url
+                FROM products , size,page_url 
+                WHERE  products.size = size.id_size AND products.id = $idProduct AND page_url.id =  products.id_url";
+        return $this->loadOneRow($sql);
+    }
 }
 
 ?>

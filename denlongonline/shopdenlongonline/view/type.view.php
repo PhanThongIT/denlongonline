@@ -6,16 +6,14 @@
  * Time: 4:46 PM
  *
  */
-$slider   = $data['slider'];
-$product  = $data['product'];
-$allType  = $data['allType'];
-$nameType = $data['typeName'];
-$allSize = $data['getAllSize'];
+$slider             = $data['slider'];
+$product            = $data['product'];
+$allType            = $data['allType'];
+$nameType           = $data['typeName'];
+$allSize            = $data['getAllSize'];
 $getNew_Sale_Sldier = $data['getNew_Sale'];
 
 //print_r($allSize);die;
-
-
 ?>
 
 <!-- Main Container -->
@@ -289,7 +287,7 @@ $getNew_Sale_Sldier = $data['getNew_Sale'];
                                     {
                                         ?>
                                         <li>
-                                            <input type="checkbox" id="<?= $value_Type->url ?>" name="jtvc">
+                                            <input type="checkbox" class="typedenlong" id="<?= $value_Type->url ?>" >
                                             <label class="cate-list" for="<?= $value_Type->url ?>">
                                                 <span class="button"></span><?= $value_Type->name ?>
                                                 <span class="count">(<?= $value_Type->soluong ?>)</span>
@@ -309,23 +307,43 @@ $getNew_Sale_Sldier = $data['getNew_Sale'];
                     </div>
                     <div class="block-content">
                         <div class="slider-range">
-                            <p style="color:black ; font-size: 14px; margin-left: 20px; "> <strong> GIÁ BÁN <strong></strong></p>
-                            <div data-label-reasult="Range:" data-min="0" data-max="500" data-unit="$"
-                                 class="slider-range-price" data-value-min="50"
-                                 data-value-max="350"></div>
-                            <div class="amount-range-price">Range: $10 - $550</div>
+
                             <ul class="check-box-list">
-                                <p style="color:black ; font-size: 14px; margin-left: 20px; "> <strong> KÍCH THƯỚC(SIZE)  <strong></strong></p>
-                              <?php
-                              foreach ($allSize as $item_Size){
-                              ?>
-                                  <li>
-                                      <input type="checkbox" id="<?= $item_Size->id_size ?>" name="cc">
-                                      <label class="size-list" for="<?= $item_Size->id_size ?>">
-                                          <span class="button"></span><?= $item_Size->name_size ?>(<?php echo $item_Size->note?>)
-                                          <span class="count">(<?= $item_Size->soluong ?>)</span>
-                                      </label>
-                                  </li>
+                                <p style="color:black ; font-size: 14px; margin-left: 20px; "><strong> GIÁ BÁN<strong></strong></p>
+                                <li>
+                                    <input type="checkbox" class="pricedenlong" id="0-250000" >
+                                    <label class="cate-list" for="0-250000">
+                                        <span class="button"></span>0- 250.000 (VNĐ)
+                                    </label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" class="pricedenlong" id="250000-500000" >
+                                    <label class="cate-list" for="250000-500000">
+                                        <span class="button"></span> 250.000 - 500.000 (VNĐ)
+                                    </label>
+                                </li>
+
+
+
+
+
+                            </ul>
+                        <br>
+                            <ul class="check-box-list">
+                                <p style="color:black ; font-size: 14px; margin-left: 20px; "><strong> KÍCH THƯỚC(SIZE)
+                                        <strong></strong></p>
+                                <?php
+                                foreach ($allSize as $item_Size)
+                                {
+                                    ?>
+                                    <li>
+                                        <input type="checkbox" class="sizedenlong" id="<?= $item_Size->id_size ?>">
+                                        <label class="size-list" for="<?= $item_Size->id_size ?>">
+                                            <span class="button"></span><?= $item_Size->name_size ?>
+                                            (<?php echo $item_Size->note ?>)
+                                            <span class="count">(<?= $item_Size->soluong ?>)</span>
+                                        </label>
+                                    </li>
                                 <?php } ?>
 
                             </ul>
@@ -399,43 +417,47 @@ $getNew_Sale_Sldier = $data['getNew_Sale'];
                     <div class="block-content">
                         <ul>
                             <?php
-                            foreach ($getNew_Sale_Sldier as $item_Product){
-                            ?>
-                            <li class="item">
-                                <div class="products-block-left">
-                                    <a href="<?php echo $item_Product->url ?>-<?php echo $item_Product->id ?>" title="<?= $item_Product->name?>"
-                                       class="product-image">
-                                        <img href="<?php echo $item_Product->url ?>-<?php echo $item_Product->id ?>" src="public/source/images/products/<?= $item_Product->image?>" alt="<?= $item_Product->name?> ">
-                                    </a>
-                                </div>
-                                <div class="products-block-right">
-                                    <p class="product-name">
-                                        <a href="<?php echo $item_Product->url ?>-<?php echo $item_Product->id ?>"><?= $item_Product->name?></a>
-                                    </p>
-                                    <div class="item-price">
-                                        <div class="price-box">
-                                            <?php
-                                            if ($item_Product->promotion_price > 0)
-                                            {
-                                                ?>
-                                                <p class="special-price">
+                            foreach ($getNew_Sale_Sldier as $item_Product)
+                            {
+                                ?>
+                                <li class="item">
+                                    <div class="products-block-left">
+                                        <a href="<?php echo $item_Product->url ?>-<?php echo $item_Product->id ?>"
+                                           title="<?= $item_Product->name ?>"
+                                           class="product-image">
+                                            <img href="<?php echo $item_Product->url ?>-<?php echo $item_Product->id ?>"
+                                                 src="public/source/images/products/<?= $item_Product->image ?>"
+                                                 alt="<?= $item_Product->name ?> ">
+                                        </a>
+                                    </div>
+                                    <div class="products-block-right">
+                                        <p class="product-name">
+                                            <a href="<?php echo $item_Product->url ?>-<?php echo $item_Product->id ?>"><?= $item_Product->name ?></a>
+                                        </p>
+                                        <div class="item-price">
+                                            <div class="price-box">
+                                                <?php
+                                                if ($item_Product->promotion_price > 0)
+                                                {
+                                                    ?>
+                                                    <p class="special-price">
                                                                         <span class="price"> <?php echo number_format($item_Product->promotion_price) ?>
                                                                             VNĐ </span>
-                                                </p>
-                                                <p class="old-price">
+                                                    </p>
+                                                    <p class="old-price">
                                                                         <span class="price"> <?php echo number_format($item_Product->price) ?>
                                                                             VNĐ</span>
-                                                </p>
-                                            <?php } else { ?>
-                                                <p class="special-price">
+                                                    </p>
+                                                <?php } else { ?>
+                                                    <p class="special-price">
                                                                         <span class="price"> <?php echo number_format($item_Product->price) ?>
                                                                             VNĐ  </span>
-                                                </p>
-                                            <?php } ?>
+                                                    </p>
+                                                <?php } ?>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
+                                </li>
                             <?php } ?>
                         </ul>
                         <a class="link-all" href="index.php">Xem Hết</a>
@@ -452,9 +474,11 @@ $getNew_Sale_Sldier = $data['getNew_Sale'];
 <script>
     // Xử lý Ajax cho việc load thêm danh mục thể loại
     $(document).ready(function () {
-        $('input[type=checkbox]').click(function () {
+       // var tenkhongdau = $(this).attr('id');
+        $('input:checkbox[class=typedenlong]').click(function () {
             // lấy tên không dấu
             var tenkhongdau = $(this).attr('id');
+            console.log(tenkhongdau);
             $.ajax({
                 url: "ajax-categories.php",
                 type: "GET",
@@ -463,14 +487,14 @@ $getNew_Sale_Sldier = $data['getNew_Sale'];
                 },
                 success: function (response) {
                     if ($('#exist').length != 0) {
-                        if ($('.new-'+tenkhongdau).length === 0) {
+                        if ($('.new-' + tenkhongdau).length === 0) {
                             $('.products-grid').append(response);
                         } else {
                             var checked = document.querySelectorAll('input[type=checkbox]:checked');
                             if (checked.length === 0) {
                                 location.reload(true);
                             } else {
-                                $('.new-'+tenkhongdau).remove();
+                                $('.new-' + tenkhongdau).remove();
                             }
                         }
                     } else {
@@ -486,41 +510,41 @@ $getNew_Sale_Sldier = $data['getNew_Sale'];
             })
         })
     });
-    
+
     $(document).ready(function () {
-        $('input[type=checkbox]').click(function () {
-            var  id_Size = $(this).attr('id');
-             console.log(id_Size);
+        $('input:checkbox[class=sizedenlong]').click(function () {
+            var id_Size = $(this).attr('id');
+           // console.log(id_Size);
             // Xử Lý Ajax
             $.ajax({
                 url: "ajax-allsize.php",
                 type: "POST",
-                data:{
+                data: {
                     'idSize': id_Size
                 },
-                success:function (response) {
-                // Xử lý  phần  dữ liệu trên checkbox
-                if($('#exist').length != 0 ){
-                    if($('.size-'+id_Size).length === 0){
-                        $('.products-grid').append(response); // Add item vào giỏ hàng
+                success: function (response) {
+                    // Xử lý  phần  dữ liệu trên checkbox
+                    if ($('#exist').length != 0) {
+                        if ($('.size-' + id_Size).length === 0) {
+                            $('.products-grid').append(response); // Add item vào giỏ hàng
 
-                    }else{
-                        var checkSize = document.querySelectorAll('input[type=checkbox]:checked');
-                        if(checkSize.length === 0 ){
-                            location.reload();
+                        } else {
+                            var checkSize = document.querySelectorAll('input[type=checkbox]:checked');
+                            if (checkSize.length === 0) {
+                                location.reload();
 
-                        }else{
-                            $('.size-'+id_Size).remove(); //nếu chưa click checkbox 2 lần thì remove các đối tượng theo ajax
+                            } else {
+                                $('.size-' + id_Size).remove(); //nếu chưa click checkbox 2 lần thì remove các đối tượng theo ajax
 
 
+                            }
                         }
+                    } else {
+                        $('.products-grid').attr('id', 'exist');
+                        $('.products-grid').html(response); // lặp lại
                     }
-                }else{
-                    $('.products-grid').attr('id', 'exist');
-                    $('.products-grid').html(response); // lặp lại
-                }
                 },
-                error:function (error) {
+                error: function (error) {
                     console.log(error);
                 }
 
@@ -529,6 +553,57 @@ $getNew_Sale_Sldier = $data['getNew_Sale'];
 
 
     });
+    $(document).ready(function () {
+        $('input:checkbox[class=pricedenlong]').click(function () {
+            var rangePrice = $(this).attr('id');
+            // xử lý tách chuỗi để kiếm ra min max trong khoảng id
+
+          var arrayPrice =  rangePrice.split('-',2);
+          var minPrice = parseInt(arrayPrice[0]);
+          var maxPrice = parseInt(arrayPrice[1]);
+            // console.log(maxPrice);
+          // Kiêm tra tính hợp lệ
+
+            // Xử Lý Ajax
+            $.ajax({
+                url: "ajax-price.php",
+                type: "POST",
+                data: {
+                    'minPrice':minPrice,
+                    'maxPrice':maxPrice
+                },
+                success: function (response) {
+                    // Xử lý  phần  dữ liệu trên checkbox
+                    if ($('#exist').length != 0) {
+                        if ($('.price-' + minPrice+'-'+maxPrice).length === 0) {
+                            $('.products-grid').append(response); // Add item vào giỏ hàng
+                        } else {
+                            var checkPrice = document.querySelectorAll('input[type=checkbox]:checked');
+                          //  console.log(checkPrice);
+                            if (checkPrice.length === 0) {
+                                location.reload();
+
+                            } else {
+                                $('.price-' + minPrice+'-'+maxPrice).remove(); //nếu chưa click checkbox 2 lần thì remove các đối tượng theo ajax
+
+
+                            }
+                        }
+                    } else {
+                        $('.products-grid').attr('id', 'exist');
+                        $('.products-grid').html(response); // lặp lại
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+
+            })
+        })
+
+
+    });
+
 
 
 </script>

@@ -93,14 +93,15 @@
             <div class="header-top">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-4 col-sm-4 hidden-xs">
+                        <div class="col-lg-8 col-sm-8 hidden-xs">
                             <!-- Default Welcome Message -->
                             <div class="welcome-msg "> <strong>Shop Đèn Lồng Online </strong> Xin Chào</div>
-                            <span class="phone hidden-sm">Liên hệ: <strong>0971325547</strong></span>
+                            <span  class="phone hidden-sm">Liên hệ: <strong>0971325547 - 0934 724 923 </strong> </span>
+
                         </div>
 
                         <!-- top links -->
-                        <div class="headerlinkmenu col-lg-8 col-md-7 col-sm-8 col-xs-12">
+                        <div class="headerlinkmenu col-lg-4 col-md-4 col-sm-4 col-xs-12">
                             <div class="links">
                                 <div class="myaccount">
                                     <a title="My Account" href="account_page.html">
@@ -255,7 +256,7 @@
                             </li>
                             <li class="mt-root">
                                 <div class="mt-root-item">
-                                    <a href="shop_grid.html">
+                                    <a href="contact.php">
                                         <div class="title title_font">
                                             <span class="title-text">Liên Hệ</span>
                                         </div>

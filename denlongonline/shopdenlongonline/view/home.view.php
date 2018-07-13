@@ -3,6 +3,7 @@ $background = $data['background'];
 $featuredProduct = $data['featuredProduct'];
 $newProduct = $data['newProduct'];
 $topSell_Price = $data['topSell_Price'];
+$select_DLHA = $data['select_DLHA'];
 ?>
 <!-- Home Slider Start -->
 <div class="slider">
@@ -524,57 +525,45 @@ $topSell_Price = $data['topSell_Price'];
                         </div>
                     </div>
                     <?php } ?>
+                    <div class="button-cart" style="margin-top: 10px; padding: 8px;margin-left: 100px;   ">
+                        <!--                        <button  href="type.php/?denlongtruyenthong" style="text-align:center ;  margin-top: 10px; margin-left: 80px;">-->
+                        <a  style="background: yellow ; text-align: center ; padding: 10px; " href="type.php?type=denlongtruyenthong"> <strong>XEM THÊM </strong></a>
+                        <!--                        </button>-->
+                    </div>
                 </div>
             </div>
             <div class="col-md-4 col-sm-6">
                 <div class="jtv-single-cat">
-                    <h2 class="cat-title">ON SALE</h2>
-                    <div class="jtv-product">
-                        <div class="product-img">
-                            <a href="single_product.html">
-                                <img src="public/source/images/products/img12.jpg" alt="html template">
-                                <img class="secondary-img" src="public/source/images/products/img11.jpg" alt="html template"> </a>
-                        </div>
-                        <div class="jtv-product-content">
-                            <h3>
-                                <a href="single_product.html">Lorem ipsum dolor sit amet</a>
-                            </h3>
-                            <div class="price-box">
-                                <p class="special-price">
-                                    <span class="price-label">Special Price</span>
-                                    <span class="price"> $99.00 </span>
-                                </p>
-                                <p class="old-price">
-                                    <span class="price-label">Regular Price:</span>
-                                    <span class="price"> $119.00 </span>
-                                </p>
-                            </div>
-                            <div class="jtv-product-action">
-                                <div class="jtv-extra-link">
-                                    <div class="button-cart">
-                                        <button>
-                                            <i class="fa fa-shopping-cart"></i>
-                                        </button>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <h2 class="cat-title">ĐÈN LỒNG HỘI AN </h2>
+<?php
+foreach ($select_DLHA as $item_DLHA){
+?>
                     <div class="jtv-product jtv-cat-margin">
                         <div class="product-img">
-                            <a href="single_product.html">
-                                <img src="public/source/images/products/img05.jpg" alt="html template">
-                                <img class="secondary-img" src="public/source/images/products/img10.jpg" alt="html template"> </a>
+                            <a href="<?=$item_DLHA->url ?>-<?= $item_DLHA->id?>">
+                                <img src="public/source/images/products/<?= $item_DLHA->image?>" alt="<?= $item_DLHA->name?>">
+                                <img class="secondary-img" src="public/source/images/products/<?= $item_DLHA->image?>" alt="<?= $item_DLHA->name?>"> </a>
                         </div>
                         <div class="jtv-product-content">
                             <h3>
-                                <a href="single_product.html">Lorem ipsum dolor sit amet</a>
+                                <a href="<?=$item_DLHA->url ?>-<?= $item_DLHA->id?>"><?= $item_DLHA->name?></a>
                             </h3>
-                            <div class="price-box">
-                    <span class="regular-price">
-                      <span class="price">$189.00</span>
-                    </span>
+                            <div class="item-price">
+                                <div class="price-box">
+                                    <?php if($item_DLHA->promotion_price > 0 ){?>
+                                        <p class="special-price">
+                                            <span class="price"> <?php echo  number_format($item_DLHA->promotion_price)?> VNĐ </span>
+
+                                        </p>
+                                        <p class="old-price">
+                                            <span class="price"><?php echo  number_format($item_DLHA->price);?>  VNĐ </span>
+                                        </p>
+                                    <?php } else{?>
+                                        <p class="special-price">
+                                            <span class="price"><?php echo  number_format($item_DLHA->price);?>  VNĐ </span>
+                                        </p>
+                                    <?php } ?>
+                                </div>
                             </div>
                             <div class="jtv-product-action">
                                 <div class="jtv-extra-link">
@@ -588,33 +577,14 @@ $topSell_Price = $data['topSell_Price'];
                             </div>
                         </div>
                     </div>
-                    <div class="jtv-product jtv-cat-margin">
-                        <div class="product-img">
-                            <a href="single_product.html">
-                                <img src="public/source/images/products/img01.jpg" alt="html template">
-                                <img class="secondary-img" src="public/source/images/products/img03.jpg" alt="html template"> </a>
-                        </div>
-                        <div class="jtv-product-content">
-                            <h3>
-                                <a href="single_product.html">Lorem ipsum dolor sit amet</a>
-                            </h3>
-                            <div class="price-box">
-                    <span class="regular-price">
-                      <span class="price">$88.99</span>
-                    </span>
-                            </div>
-                            <div class="jtv-product-action">
-                                <div class="jtv-extra-link">
-                                    <div class="button-cart">
-                                        <button>
-                                            <i class="fa fa-shopping-cart"></i>
-                                        </button>
-                                    </div>
+                    <?php }?>
 
-                                </div>
-                            </div>
-                        </div>
+                    <div class="button-cart" style="margin-top: 10px; padding: 8px;margin-left: 100px;   ">
+<!--                        <button  href="type.php/?denlongtruyenthong" style="text-align:center ;  margin-top: 10px; margin-left: 80px;">-->
+                        <a  style="background: yellow ; text-align: center ; padding: 10px; " href="type.php?type=denlongtruyenthong"> <strong>XEM THÊM </strong></a>
+<!--                        </button>-->
                     </div>
+
                 </div>
             </div>
 

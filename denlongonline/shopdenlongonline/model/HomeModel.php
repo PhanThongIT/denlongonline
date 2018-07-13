@@ -44,6 +44,16 @@ class HomeModel extends DBConnect
                 LIMIT 0,3";
         return $this->loadMoreRows($sql);
     }
+    function select_DenLongHoiAn (){
+        $sql = "SELECT products.* , page_url.url
+        FROM  products , page_url 
+        WHERE products.id_url = page_url.id
+        GROUP BY products.price DESC
+        LIMIT 0,3
+    ";
+        return $this->loadMoreRows($sql);
+    }
+
 
 }
 
