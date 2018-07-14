@@ -8,58 +8,59 @@
  */
 class Cart
 {
-    // Khởi tạo lên các biến càn thiết trong giỏ hàng
-    public $items = []; // sản phẩm
-    public $totalQty = 0; // số lượng
-    public $totalPrice = 0; // giá chưa khuyến mãi
-    public $promtPrice = 0; // giá khuyến mãi
+    //Khai báo các biến cần thiết trong Giỏ hàng
+    public $items = []; // Mảng các  sản phẩm
+    public $totalQty = 0;  // Tổng số lượng sản phẩm
+    public $totalPrice = 0;  //  Tổng tiền trước khuyến mãi
+    public $totalPromtionPrice = 0; // tổng tiền khi được khuyến mãi
 
-    // Phương thức khởi tạo  contructor
-    function __construct($listSanPham = null)
+    // Xây dựng phương thức khởi tạo cho giỏ hang
+    function __construct($oldCart = null)
     {
-// Kiểm tra xem list sản phẩm tồn tại ?
-        if ($listSanPham)
+        // Kiểm tra giỏ hàng có sản phẩm khoogn
+        if ($oldCart)
         {
-            $this->items      = $listSanPham->items;
-            $this->qty        = $listSanPham->totalQty;
-            $this->price      = $listSanPham->totalPrice;
-            $this->promtPrice = $listSanPham->promtPrice;
+            $this->items = $oldCart->items;
+            $this->totalQty = $oldCart->totalQty;
+            $this->totalPrice = $oldCart->totalPrice;
+            $this->totalPromtionPrice = $oldCart->totalPromtionPrice;
         }
+
     }
 
-    // Thêm 1 sản phẩm vào listSanPham
-    function add_Item_Cart($item, $qty = 1)
-    {
-        // Kiếm tra xem sane phẩm này có khuyến mãi hay không
-        if ($item->promotion_price == 0)
-        {
+    // Xây dựng phương thức thêm 1 sản phẩm vào giỏ hàng
+    function add_Item_Cart($item  , $soluong =1 ){
+        // kiếm tra xem sản phẩm này có khuyến mãi không ?
+        if($item->promotion_price == 0){
             $item->promotion_price = $item->price;
         }
-        // Đưa sản phẩm vào mảng
-        $listSanPham = [
-            'qty'           => 0,
-            'price'         => $item->price,
-            'discountPrice' => $item->promotion_price,
-            'item'          => $item
+        // tạo mảng gió hàng
+        $giohang = [
+            'qty'=> 0 ,
+            'price'=>$item->price ,
+            'discountPrice'=>$item->promotion_price,  // tính tổng tiền của sản phẩm
+            'item' => $item
+
         ];
-        // Kiếm tra sự tồn tại  cảu sản phẩm
-        if ($this->items)
-        {
-            if (array_key_exists($item->id, $this->items))
-            {
-                $listSanPham = $this->items[$item->id];
+
+        // Kiểm tra xem trước đó sản phẩm này đã có trong giỏ hàng chưa ? trả về TRUE OR FALSE
+        if($this->items){
+            if(array_key_exists($item->id , $this->items)){
+                $giohang = $this->items[$item->id];
             }
-            // Tính giá tiền của 1 sản phẩm kèm theo số lượng
-            $listSanPham['qty']           = $listSanPham['qty'] + $qty;
-            $listSanPham['price']         = $listSanPham['qty'] * $item->price;
-            $listSanPham['discountPrice'] = $listSanPham['qty'] * $item->promotion_price;
-            // Tính tổng giá tiền của giò hàng
-            $this->items[$item->id] = $listSanPham;
-            $this->totalQty         = $this->totalQty + $qty;
-            $this->totalPrice       = $this->totalPrice + ($listSanPham['item']->price * $qty);
-            $this->promtPrice       = $this->promtPrice + ($listSanPham['item']->promotion_price * qty);
         }
+        // tính tiền cho 1 sản phẩm theo số lượng
+        $giohang['qty'] = $giohang['qty'] + $soluong;
+        $giohang['price'] = $item->price * $giohang['qty'];
+        $giohang['discountPrice'] = $item->promotion_price * $giohang['qty'];
+        // Tính tiền cho cả giỏ hàng
+        $this->items[$item->id] = $giohang ;
+        $this->totalQty = $this->totalQty + $soluong ;
+        $this->totalPrice = $this->totalPrice  + ($soluong* $giohang['item']->price);
+        $this->totalPromtionPrice = $this->totalPromtionPrice+ ($soluong * $giohang['item']->promotion_price);
+
     }
+
 }
 
 ?>

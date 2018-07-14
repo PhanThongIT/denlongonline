@@ -103,7 +103,7 @@ $select_DLHA = $data['select_DLHA'];
                                                                     <img class="hover-img" src="public/source/images/products/<?php echo $item->image?>" alt="<?php echo  $item->name?>">
                                                                 </figure>
                                                             </a>
-                                                            <button type="button" class="add-to-cart-mt">
+                                                            <button id-sp="<?=$item->id?>" type="button" class="add-to-cart-mt">
                                                                 <i class="fa fa-shopping-cart"></i>
                                                                 <span> Thêm vào Giỏ hàng</span>
                                                             </button>
@@ -428,7 +428,7 @@ $select_DLHA = $data['select_DLHA'];
                                                 <img class="hover-img" src="public/source/images/products/<?php echo  $item->image;?>" alt="<?php echo  $item->name;?>">
                                             </figure>
                                         </a>
-                                        <button type="button" class="add-to-cart-mt">
+                                        <button id-sp="<?=$item->id?>" class="add-to-cart-mt" type="button" >
                                             <i class="fa fa-shopping-cart"></i>
                                             <span> Thêm vào Giỏ hàng</span>
                                         </button>
@@ -502,21 +502,30 @@ $select_DLHA = $data['select_DLHA'];
 
                                             </p>
                                             <p class="old-price">
-                                                <span class="price"><?php echo  number_format($topsell_price->price);?>  VNĐ </span>
+                                                <span " class="price"><?php echo  number_format($topsell_price->price);?>  VNĐ </span>
                                             </p>
                                         <?php } else{?>
                                             <p class="special-price">
-                                                <span class="price"><?php echo  number_format($topsell_price->price);?>  VNĐ </span>
+                                                <span  class="price"><?php echo  number_format($topsell_price->price);?>  VNĐ </span>
                                             </p>
+
+
                                         <?php } ?>
+
+
                                     </div>
+
                                 </div>
+                            </div>
+                            <div>
+
                             </div>
                             <div class="jtv-product-action">
                                 <div class="jtv-extra-link">
                                     <div class="button-cart">
-                                        <button>
+                                        <button id-sp="<?=$topsell_price->id?>" class="add-to-cart-mt">
                                             <i class="fa fa-shopping-cart"></i>
+
                                         </button>
                                     </div>
 
@@ -568,7 +577,7 @@ foreach ($select_DLHA as $item_DLHA){
                             <div class="jtv-product-action">
                                 <div class="jtv-extra-link">
                                     <div class="button-cart">
-                                        <button>
+                                        <button id-sp="<?=$item_DLHA->id?>" class="add-to-cart-mt">
                                             <i class="fa fa-shopping-cart"></i>
                                         </button>
                                     </div>

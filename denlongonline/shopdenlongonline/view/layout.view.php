@@ -163,7 +163,7 @@
                             <div class="mini-cart">
                                 <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle">
                                     <a href="#">
-                                        <div class="cart-icon">
+                                        <div  class="cart-icon">
                                             <i class="fa fa-shopping-cart"></i>
                                         </div>
                                         <div class="shoppingcart-inner hidden-xs">
@@ -297,8 +297,14 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-body">
-                    <h5>Đã thêm <i class="name-res">...</i> vào giỏ hàng</h5>
-                    <h6><a href="shopping-cart.php">Xem giỏ hàng</a></h6>
+                    <h5 style="text-align: center ;color: green">THÊM THÀNH CÔNG SẢN PHẨM VÀO GIỎ HÀNG </h5>
+                    <h5 style="text-align: center">
+                        <i style="color: red;" >Thông Tin Sản Phẩm</i>
+                    </br>
+
+                        Tên:<i class="name-res">...</i>
+                    </h5>
+                    <h6 style="text-align: center"><a style="font-size: 20px;color: red;" href="cart.php">Xem giỏ hàng</a></h6>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -573,27 +579,55 @@
     </script>
 <?php endif ?>
 <script>
+    // Xử lý ajax từ trang Detail sản phẩm
+    
+    //Xử lý ajax  từ trang product 
     $(document).ready(function () {
         $('.add-to-cart-mt').click(function () {
-            var idSP = $(this).attr('id-sp');
-            var soluong = $('#qty').val() ; // lấy giá trị của biến qty bên detail
-            $.ajax({
-                url: 'cart.php',
-                type: "POST",
-                data: {
-                    id: idSP, // $_POST['id']
-                    qty: soluong // [POST]['qty']
-                },
-                success: function (res) {
-                    $('.name-res').html(res)
-                    $('#cartModal').modal('show')
-                },
-                error: function () {
-                    console.log('errr')
-                }
-            })
+            var id_Product = $(this).attr('id-sp');
+            // Xử lý ajax truyền qya controller
+
+            //console.log(id_Product);
+           $.ajax({
+                url:'cart.php',
+               type:"POST" ,
+               data: {
+                   'id_Cart_Product':parseInt(id_Product)
+               },
+               success:function (res) {
+                //Show ra bảng thông báo thêm sản phẩm
+                   $('.name-res').html(res);
+                   $('#cartModal').modal('show');
+               },
+               error:function (error) {
+                   console.log(error);
+
+               }
+
+           })
         })
     })
+    // $(document).ready(function () {
+    //     $('.add-to-cart-mt').click(function () {
+    //         var idSP = $(this).attr('id-sp');
+    //         var soluong = $('#qty').val() ; // lấy giá trị của biến qty bên detail
+    //         $.ajax({
+    //             url: 'cart.php',
+    //             type: "POST",
+    //             data: {
+    //                 id: idSP, // $_POST['id']
+    //                 qty: soluong // [POST]['qty']
+    //             },
+    //             success: function (res) {
+    //                 $('.name-res').html(res)
+    //                 $('#cartModal').modal('show')
+    //             },
+    //             error: function () {
+    //                 console.log('errr')
+    //             }
+    //         })
+    //     })
+    // })
 
 
 </script>

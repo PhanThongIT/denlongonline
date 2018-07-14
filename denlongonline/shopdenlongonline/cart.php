@@ -7,5 +7,5 @@
  */
 include_once 'controller/CartController.php' ;
 $view  =  new CartController();
-$view->loadOldCart();
+return $view->addProduct_To_Cart();
 ?>

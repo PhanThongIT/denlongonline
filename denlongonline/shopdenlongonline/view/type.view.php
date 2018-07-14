@@ -322,6 +322,12 @@ $getNew_Sale_Sldier = $data['getNew_Sale'];
                                         <span class="button"></span> 250.000 - 500.000 (VNĐ)
                                     </label>
                                 </li>
+                                <li>
+                                    <input type="checkbox" class="pricedenlong" id="500000-1000000" >
+                                    <label class="cate-list" for="500000-1000000">
+                                        <span class="button"></span> 500.000 - 1.000.000 (VNĐ)
+                                    </label>
+                                </li>
 
 
 

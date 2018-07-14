@@ -1586,9 +1586,7 @@ ul#cart-sidebar {
 .add-to-cart-mt {
 	background: #fed700;
 	border: 0 none;
-	bottom: 0;
 	font-size: 12px;
-	left: -100%;
 	line-height: 10px;
 	position: absolute;
 	text-align: center;
