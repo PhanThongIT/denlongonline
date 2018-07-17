@@ -2,7 +2,6 @@
 <html lang="en">
 
 
-
 <head>
     <!-- Basic page needs -->
     <meta charset="utf-8">
@@ -95,8 +94,8 @@
                     <div class="row">
                         <div class="col-lg-8 col-sm-8 hidden-xs">
                             <!-- Default Welcome Message -->
-                            <div class="welcome-msg "> <strong>Shop Đèn Lồng Online </strong> Xin Chào</div>
-                            <span  class="phone hidden-sm">Liên hệ: <strong>0971325547 - 0934 724 923 </strong> </span>
+                            <div class="welcome-msg "><strong>Shop Đèn Lồng Online </strong> Xin Chào</div>
+                            <span class="phone hidden-sm">Liên hệ: <strong>0971325547 - 0934 724 923 </strong> </span>
 
                         </div>
 
@@ -142,7 +141,7 @@
                                         <select class="cate-dropdown hidden-xs" name="category_id">
                                             <option>Tìm Kiếm</option>
                                             <option>Đèn Lồng Hội An</option>
-                                            <option>Đèn Hoa Sen </option>
+                                            <option>Đèn Hoa Sen</option>
                                             <option>Đèn Gỗ</option>
                                         </select>
                                         <input type="text" class="form-control" placeholder="Search" name="search">
@@ -163,7 +162,7 @@
                             <div class="mini-cart">
                                 <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle">
                                     <a href="#">
-                                        <div  class="cart-icon">
+                                        <div class="cart-icon">
                                             <i class="fa fa-shopping-cart"></i>
                                         </div>
                                         <div class="shoppingcart-inner hidden-xs">
@@ -299,12 +298,13 @@
                 <div class="modal-body">
                     <h5 style="text-align: center ;color: green">THÊM THÀNH CÔNG SẢN PHẨM VÀO GIỎ HÀNG </h5>
                     <h5 style="text-align: center">
-                        <i style="color: red;" >Thông Tin Sản Phẩm</i>
-                    </br>
+                        <i style="color: red;">Thông Tin Sản Phẩm</i>
+                        </br>
 
                         Tên:<i class="name-res">...</i>
                     </h5>
-                    <h6 style="text-align: center"><a style="font-size: 20px;color: red;" href="cart.php">Xem giỏ hàng</a></h6>
+                    <h6 style="text-align: center"><a style="font-size: 20px;color: red;" href="mycart.php">Xem giỏ
+                            hàng</a></h6>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -358,8 +358,8 @@
                 <div class="col-sm-6 col-md-4 col-xs-12 col-lg-3">
                     <div class="footer-logo">
                         <a href="index.php">
-<!--                           // <img src="public/source/images/products/hoi-an-in-hinh-toi.png" alt="fotter logo">-->
-                  <h3> SHOP ĐÈN LỒNG ONLINE </h3>
+                            <!--                           // <img src="public/source/images/products/hoi-an-in-hinh-toi.png" alt="fotter logo">-->
+                            <h3> SHOP ĐÈN LỒNG ONLINE </h3>
                         </a>
                     </div>
                     <h3>"TỰ HÀO BẢN SẮC DÂN TỘC"</h3>
@@ -374,9 +374,9 @@
                         </div>
                         <div class="address">
                             <i class="fa fa-map-marker"></i>
-                            <p> <strong>CHI NHÁNH 1: </strong> 97 Man Thiện - Phường Hiệp Phú - Quận  9 - TP.HCM</p>
+                            <p><strong>CHI NHÁNH 1: </strong> 97 Man Thiện - Phường Hiệp Phú - Quận 9 - TP.HCM</p>
                             <i class="fa fa-map-marker"></i>
-                            <p> <strong>CHI NHÁNH 2:</strong> 198 Nam Hòa - Phước Long A - Quận 9 - TP.HCM</p>
+                            <p><strong>CHI NHÁNH 2:</strong> 198 Nam Hòa - Phước Long A - Quận 9 - TP.HCM</p>
                         </div>
                     </div>
                 </div>
@@ -580,55 +580,80 @@
 <?php endif ?>
 <script>
     // Xử lý ajax từ trang Detail sản phẩm
-    
-    //Xử lý ajax  từ trang product 
+
+    //Xử lý ajax  từ trang product  // hOME
+
     $(document).ready(function () {
         $('.add-to-cart-mt').click(function () {
             var id_Product = $(this).attr('id-sp');
             // Xử lý ajax truyền qya controller
 
             //console.log(id_Product);
-           $.ajax({
-                url:'cart.php',
-               type:"POST" ,
-               data: {
-                   'id_Cart_Product':parseInt(id_Product)
-               },
-               success:function (res) {
-                //Show ra bảng thông báo thêm sản phẩm
-                   $('.name-res').html(res);
-                   $('#cartModal').modal('show');
-               },
-               error:function (error) {
-                   console.log(error);
+            $.ajax({
+                url: 'cart.php',
+                type: "POST",
+                data: {
+                    'id_Cart_Product': parseInt(id_Product)
+                },
+                success: function (res) {
+                    //Show ra bảng thông báo thêm sản phẩm
+                    $('.name-res').html(res);
+                    $('#cartModal').modal('show');
+                },
+                error: function (error) {
+                    console.log(error);
 
-               }
+                }
 
-           })
+            })
+        });
+        $('.add-to-cart-mt-1').click(function () {
+            var id_Product = $(this).attr('id-sp');
+            // Xử lý ajax truyền qya controller
+
+            //console.log(id_Product);
+            $.ajax({
+                url: 'cart.php',
+                type: "POST",
+                data: {
+                    'id_Cart_Product': parseInt(id_Product)
+                },
+                success: function (res) {
+                    //Show ra bảng thông báo thêm sản phẩm
+                    $('.name-res').html(res);
+                    $('#cartModal').modal('show');
+                },
+                error: function (error) {
+                    console.log(error);
+
+                }
+
+            })
+        });
+    });
+    // xỬ LÝ CHO trang  Detail khi kèm theo là số lượng và id của sản phẩm
+        $('.pro-add-to-cart').click(function () {
+            var idProduct = $(this).attr('id-product');
+            var  quantity = $('#qty').val();
+            // console.log(idProduct);
+             console.log(quantity);
+            $.ajax({
+                url:"cart.php",
+                type:"POST",
+                data:{
+                    'qty':parseInt(quantity),
+                    'id_Cart_Product':parseInt(idProduct)
+                },
+                success:function(response){
+                    $('.name-res').html(response);
+                    $('#cartModal').modal('show');
+                    $('#qty').val(1);
+            },
+                error:function (error) {
+                    console.log(error);
+                }
+            })
         })
-    })
-    // $(document).ready(function () {
-    //     $('.add-to-cart-mt').click(function () {
-    //         var idSP = $(this).attr('id-sp');
-    //         var soluong = $('#qty').val() ; // lấy giá trị của biến qty bên detail
-    //         $.ajax({
-    //             url: 'cart.php',
-    //             type: "POST",
-    //             data: {
-    //                 id: idSP, // $_POST['id']
-    //                 qty: soluong // [POST]['qty']
-    //             },
-    //             success: function (res) {
-    //                 $('.name-res').html(res)
-    //                 $('#cartModal').modal('show')
-    //             },
-    //             error: function () {
-    //                 console.log('errr')
-    //             }
-    //         })
-    //     })
-    // })
-
 
 </script>
 

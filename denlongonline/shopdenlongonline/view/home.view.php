@@ -432,6 +432,7 @@ $select_DLHA = $data['select_DLHA'];
                                             <i class="fa fa-shopping-cart"></i>
                                             <span> Thêm vào Giỏ hàng</span>
                                         </button>
+
                                     </div>
 
                                 </div>
@@ -523,9 +524,8 @@ $select_DLHA = $data['select_DLHA'];
                             <div class="jtv-product-action">
                                 <div class="jtv-extra-link">
                                     <div class="button-cart">
-                                        <button id-sp="<?=$topsell_price->id?>" class="add-to-cart-mt">
+                                        <button id-sp="<?=$topsell_price->id?>" class="add-to-cart-mt-1">
                                             <i class="fa fa-shopping-cart"></i>
-
                                         </button>
                                     </div>
 
@@ -577,7 +577,7 @@ foreach ($select_DLHA as $item_DLHA){
                             <div class="jtv-product-action">
                                 <div class="jtv-extra-link">
                                     <div class="button-cart">
-                                        <button id-sp="<?=$item_DLHA->id?>" class="add-to-cart-mt">
+                                        <button id-sp="<?=$item_DLHA->id?>" class="add-to-cart-mt-1">
                                             <i class="fa fa-shopping-cart"></i>
                                         </button>
                                     </div>
