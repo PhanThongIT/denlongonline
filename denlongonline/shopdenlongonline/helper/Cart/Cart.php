@@ -74,7 +74,7 @@ class Cart
             $item->promotion_price = $item->price;
         }
         $giohang = [
-            'qty'           => 0,
+            'qty'           => $soluong,
             'price'         => $item->price,
             'discountPrice' => $item->promotion_price,  // tính tổng tiền của sản phẩm
             'item'          => $item
@@ -87,16 +87,16 @@ class Cart
             if (array_key_exists($idProduct, $this->items))
             {
                 // thực hiện viejc upload lại giỏ hàng
-                $this->totalQty = $this->items[$idProduct]['qty'];
-                $this->totalPrice = $this->items[$idProduct]['price'];
-                $this->totalPromtionPrice = $this->items[$idProduct]['discountPrice'];
+                $this->totalQty -= $this->items[$idProduct]['qty'];
+                $this->totalPrice -= $this->items[$idProduct]['price'];
+                $this->totalPromtionPrice -= $this->items[$idProduct]['discountPrice'];
             }
         }
         // Tính lại giá trị của Giỏ hàng
         $giohang['price'] =  $item->price  * $giohang['qty'];
         $giohang['discountPrice'] = $item->promotion_price * $giohang['qty'];
         // Up date lại  giot hàng cho toàn sản phẩm
-        $this->items['id']  = $giohang  ;
+        $this->items[$idProduct]  = $giohang  ;
         $this->totalQty = $this->totalQty + $soluong ;
         $this->totalPrice = $this->totalPrice + ($giohang['item']->price * $soluong);
         $this->totalPromtionPrice = $this->totalPromtionPrice + ($giohang['item']->promotion_price * $soluong);

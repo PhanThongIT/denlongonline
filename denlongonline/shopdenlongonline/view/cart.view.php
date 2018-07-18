@@ -65,12 +65,15 @@
                                         </td>
 
 
-                                        <td class="qty"><input class="form-control input-sm" type="text"
+                                        <td class="qty"><input id-sp="<?= $sp['item']->id ?>"
+                                                               class="form-control input-sm" type="text"
                                                                value="<?= number_format($sp['qty']); ?>"></td>
-                                        <td><span class="price"> <?php echo number_format($sp['discountPrice']) ?> VNĐ
+                                        <td><span class="price"
+                                                  id="price-<?= $sp['item']->id ?>"> <?php echo number_format($sp['discountPrice']) ?>
+                                                VNĐ
                                         </td>
 
-                                        <td style="cursor: pointer" class="delete-item-cart"
+                                        <td style="text-align: center;cursor: pointer" class="delete-item-cart"
                                             id-item="<?php echo $sp['item']->id ?>"><a><i class="icon-close"></i></a>
                                         </td>
                                     </tr>
@@ -106,6 +109,7 @@
 <script type="text/javascript" src="public/source/js/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
+        var timer;
         // Xử lý việc xóa 1 item product
         $('.delete-item-cart').click(function () {
             var idItem = $(this).attr('id-item');
@@ -114,12 +118,12 @@
                 url: "cart.php",
                 type: "POST",
                 data: {
-                    'idProduct': idItem,
+                    'idProduct': parseInt(idItem),
                     'method': "delete" // tự tạo phương thức xóa- sữa bằng cách send qua chuỗi
                 },
-                dataType:"json",
+                dataType: "json",
                 success: function (res) {
-                    $('#item-cart-'+idItem).hide(1000);
+                    $('#item-cart-' + idItem).hide(1000);
                     //cập nhật lại giá tiền tổng
                     $('.totalPrice').html(res.price + 'VNĐ');
                     $('.promtPrice').html(res.totalPromt_Price + 'VNĐ');
@@ -130,6 +134,41 @@
             })
 
         });
+
+        $('.input-sm').keyup(function () {
+            window.clearTimeout(timer);
+            var soluong = $(this).val();
+            if (isNaN(soluong) || soluong > 100 || soluong <= 0) {
+                alert('Vui Lòng nhập vào số [0-9] - Lớn nhất là :100 Sản phẩm.');
+                $(this).val('');
+                $(this).focus();
+                return;
+            }
+            var idProduct = $(this).attr('id-sp');
+            console.log(soluong);
+            console.log(idProduct);
+            timer = window.setTimeout(function () {
+                $.ajax({
+                    url: 'cart.php',
+                    type: "POST",
+                    data: {
+                        'soluong': parseInt(soluong),
+                        'idProduct': parseInt(idProduct),
+                        'method': "update"
+                    },
+                    dataType: "json",
+                    success: function (response) {
+                        $('#price-' + idProduct).html(response.price + 'VNĐ');
+                        $('.totalPrice').html(response.totalPrice + 'VNĐ');
+                        $('.promtPrice').html(response.totalPromtPrice + 'VNĐ');
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                })
+            })
+
+        })
     })
 
 </script>
