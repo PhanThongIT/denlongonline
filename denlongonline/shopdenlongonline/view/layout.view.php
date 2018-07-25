@@ -1,3 +1,9 @@
+<?php
+session_start();
+//echo $_SESSION['fullname'];die;
+//
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,6 +14,7 @@
     <!--[if IE]>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <![endif]-->
+    <base href="http://localhost:81/denlongonline/shopdenlongonline/">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title><?= $title ?> </title>
     <base href="http://localhost:81/denlongonline/shopdenlongonline/">
@@ -92,7 +99,7 @@
             <div class="header-top">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-8 col-sm-8 hidden-xs">
+                        <div class="col-lg-7 col-sm-7 hidden-xs">
                             <!-- Default Welcome Message -->
                             <div class="welcome-msg "><strong>Shop Đèn Lồng Online </strong> Xin Chào</div>
                             <span class="phone hidden-sm">Liên hệ: <strong>0971325547 - 0934 724 923 </strong> </span>
@@ -100,21 +107,40 @@
                         </div>
 
                         <!-- top links -->
-                        <div class="headerlinkmenu col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="headerlinkmenu col-lg-5 col-md-5 col-sm-4 col-xs-12">
                             <div class="links">
-                                <div class="myaccount">
-                                    <a title="My Account" href="account_page.html">
-                                        <i class="fa fa-user"></i>
-                                        <span class="hidden-xs">My Account</span>
-                                    </a>
-                                </div>
+                                <?php
+                                if(!isset($_SESSION['fullname']))
+                                {
+                                    ?>
+                                    <div class="myaccount">
+                                        <a title="My Account" href="account_page.html">
+                                            <i class="fa fa-user"></i>
+                                            <span class="hidden-xs">My Account</span>
+                                        </a>
+                                    </div>
+                                    <div class="login">
+                                        <a href="admin/login.php">
+                                            <i class="fa fa-unlock-alt"></i>
+                                            <span class="hidden-xs">Đăng Nhập</span>
+                                        </a>
+                                    </div>
+                                    <?php
+                                }else {
+                                ?>
+                                    <div >
+                                            <a title="<?php echo $_SESSION['fullname'] ?>">
+                                                <span class="hidden-xs">Chào, <h6> <?php echo $_SESSION['fullname'] ?></h6> </span>
+                                            </a>
 
-                                <div class="login">
-                                    <a href="account_page.html">
-                                        <i class="fa fa-unlock-alt"></i>
-                                        <span class="hidden-xs">Log In</span>
-                                    </a>
-                                </div>
+
+                                            <a title="<?php echo "logOut" ?>" href="admin/quantri.php?alias=logout">
+                                                <span class="hidden-xs">Đăng Xuất </span>
+                                            </a>
+
+
+                                    </div>
+                                <?php }?>
                             </div>
                         </div>
                     </div>
@@ -161,12 +187,12 @@
                         <div class="top-cart-contain">
                             <div class="mini-cart">
                                 <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle">
-                                    <a href="#">
+                                    <a href="order.php">
                                         <div class="cart-icon">
                                             <i class="fa fa-shopping-cart"></i>
                                         </div>
                                         <div class="shoppingcart-inner hidden-xs">
-                                            <span class="cart-title">Shopping Cart</span>
+                                            <span class="cart-title">Giỏ hàng của bạn </span>
                                             <span class="cart-total">4 Item(s): $520.00</span>
                                         </div>
                                     </a>
@@ -632,28 +658,29 @@
         });
     });
     // xỬ LÝ CHO trang  Detail khi kèm theo là số lượng và id của sản phẩm
-        $('.pro-add-to-cart').click(function () {
-            var idProduct = $(this).attr('id-product');
-            var  quantity = $('#qty').val();
-            // console.log(idProduct);
-             console.log(quantity);
-            $.ajax({
-                url:"cart.php",
-                type:"POST",
-                data:{
-                    'qty':parseInt(quantity),
-                    'id_Cart_Product':parseInt(idProduct)
-                },
-                success:function(response){
-                    $('.name-res').html(response);
-                    $('#cartModal').modal('show');
-                    $('#qty').val(1);
+    $('.pro-add-to-cart').click(function () {
+        var idProduct = $(this).attr('id-product');
+        var quantity = $('#qty').val();
+
+        // console.log(idProduct);
+        console.log(quantity);
+        $.ajax({
+            url: "cart.php",
+            type: "POST",
+            data: {
+                'qty': parseInt(quantity),
+                'id_Cart_Product': parseInt(idProduct)
             },
-                error:function (error) {
-                    console.log(error);
-                }
-            })
+            success: function (response) {
+                $('.name-res').html(response);
+                $('#cartModal').modal('show');
+                $('#qty').val(1);
+            },
+            error: function (error) {
+                console.log(error);
+            }
         })
+    })
 
 </script>
 

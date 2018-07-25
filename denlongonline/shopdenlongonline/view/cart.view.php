@@ -15,7 +15,7 @@
 
                 <div class="page-content page-order">
                     <div class="page-title">
-                        <h2>GIỎ HÀNG CỦA BẠN </h2>
+                        <h2 id="status">GIỎ HÀNG CỦA BẠN </h2>
                     </div>
 
 
@@ -98,7 +98,7 @@
                         <div class="cart_navigation"><a class="continue-btn" href="index.php"><i
                                         class="fa fa-arrow-left"> </i>&nbsp;
                                 TIẾP TỤC MUA SẮM</a>
-                            <a class="checkout-btn" href="#"><i class="fa fa-check"></i>
+                            <a class="checkout-btn" href="order.php"><i class="fa fa-check"></i>
                                 ĐI ĐẾN ĐẶT HÀNG </a></div>
                     </div>
                 </div>
@@ -166,7 +166,7 @@
                         console.log(error);
                     }
                 })
-            })
+            },1000);
 
         })
     })

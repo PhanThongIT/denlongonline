@@ -200,3 +200,19 @@ $item_detail     = $data['get_DetailProduct'];
     </div>
 </section>
 <!-- Related Product Slider End -->
+<script type="text/javascript" src="public/source/js/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.qty').keyup(function () {
+            var  soluong  = $('#qty').val();
+            // console.log(soluong);
+        if(isNaN(soluong) || soluong <= 0  || soluong >100){
+            alert("Nhập sai | Phải là số, trong khoảng (0 -100)");
+            $('#qty').val('');
+            $('#qty').focus();
+            return;
+        }
+        })
+    })
+</script>

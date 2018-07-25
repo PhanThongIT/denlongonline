@@ -80,12 +80,26 @@ class CartController extends Controller
         // THực hiện việc xóa Product khỏi giỏ hàng
         $cart->delete_Product($idProduct);
         $_SESSION['cart'] = $cart; //  Tạo SESSION  cho giỏ hàng
-        // Chuyển thành JSON để cập nhật lại giỏ hàng
-        echo json_encode([
-            'qty'              => $cart->totalQty,
-            'price'            => number_format($cart->totalPrice),
-            'totalPromt_Price' => number_format($cart->totalPromtionPrice)
-        ]);
+        $count  = sizeof($cart->items);
+        if($count != 0 ){
+            // Chuyển thành JSON để cập nhật lại giỏ hàng
+            echo json_encode([
+                // 'qty'              => $cart->totalQty,
+                'price'            => number_format($cart->totalPrice),
+                'totalPromt_Price' => number_format($cart->totalPromtionPrice)
+            ]);
+        }else {
+            unset($_SESSION['cart']);
+            // Chuyển thành JSON để cập nhật lại giỏ hàng
+
+            echo json_encode([
+                // 'qty'              => $cart->totalQty,
+//                'status'=>"BẠN CHƯA CÓ SẢN PHẨM NÀO TRONG GIỎ HÀNG !",
+                'price'            => 0,
+                'totalPromt_Price' => 0
+            ]);
+        }
+
         // print_r($_SESSION['cart']);
 
     }
@@ -93,7 +107,7 @@ class CartController extends Controller
     function update_Item_Quantity()
     {
         $idProduct = $_POST['idProduct'];
-       $qty = $_POST['soluong'];
+         $qty = $_POST['soluong'];
         $model     = new DetailModel();
         $product   = $model->findProductByID($idProduct);
 
@@ -101,12 +115,26 @@ class CartController extends Controller
         $cart    = new Cart($oldCart);
         $cart->update_Cart($product, $qty);
         $_SESSION['cart'] = $cart;
-        echo json_encode([
-            'price'           => number_format($cart->items[$idProduct]['price']),
-            "totalPrice"      => number_format($cart->totalPrice),
-            "totalPromtPrice" => number_format($cart->totalPromtionPrice),
-            "totalQty"        => $cart->totalQty
-        ]);
+        $count = sizeof($cart->items);
+            if($count!=0){
+                echo json_encode([
+                    'price'           => number_format($cart->items[$idProduct]['price']),
+                    "totalPrice"      => number_format($cart->totalPrice),
+                    "totalPromtPrice" => number_format($cart->totalPromtionPrice),
+//            "totalQty"        => $cart->totalQty
+                ]);
+            }else{
+                unset($_SESSION['cart']);
+                echo json_encode([
+//                    'status'=>"BẠN CHƯA CÓ SẢN PHẨM NÀO TRONG GIỎ HÀNG !",
+                    'price'           => 0,
+                    "totalPrice"      => 0,
+                    "totalPromtPrice" => 0,
+//            "totalQty"        => $cart->totalQty
+                ]);
+            }
+
+
 
 
     }
