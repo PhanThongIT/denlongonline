@@ -109,7 +109,7 @@ $item_detail     = $data['get_DetailProduct'];
     </div>
 </div>
 
-<!-- Main Container End -->
+
 <!-- Related Product Slider -->
 <section class="upsell-product-area">
     <div class="container">
@@ -194,14 +194,28 @@ $item_detail     = $data['get_DetailProduct'];
                         </div>
                     </div>
                 </div>
+                <div class="col-md-12"style="text-align: center;" >
+                    <div id="fb-root"></div>
+                    <script>(function(d, s, id) {
+                            var js, fjs = d.getElementsByTagName(s)[0];
+                            if (d.getElementById(id)) return;
+                            js = d.createElement(s); js.id = id;
+                            js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.1&appId=2153520284931557&autoLogAppEvents=1';
+                            fjs.parentNode.insertBefore(js, fjs);
+                        }(document, 'script', 'facebook-jssdk'));</script>
+                    <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-numposts="5"></div>                    <!-- Main Container End -->
+
+                </div>
 
             </div>
         </div>
     </div>
 </section>
-<!-- Related Product Slider End -->
+<div id="fb-root"></div>
+
 <script type="text/javascript" src="public/source/js/jquery.min.js"></script>
 
+<!-- Related Product Slider End -->
 <script>
     $(document).ready(function () {
         $('.qty').keyup(function () {

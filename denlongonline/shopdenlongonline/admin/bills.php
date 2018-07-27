@@ -9,6 +9,7 @@ include_once 'Controller/BillsController.php';
 $view =  new BillsController();
 if(isset($_GET['status'])){
     $view->getBillsByStatus();
+
 }elseif (isset($_POST['idbill']) && isset($_POST['statusGiaoHang'])){
     $view->getUpdateBill();
 }elseif (isset($_POST['idbill']) && isset($_POST['statusHuy'])){

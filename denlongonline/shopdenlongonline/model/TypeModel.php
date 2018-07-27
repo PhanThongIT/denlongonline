@@ -22,7 +22,7 @@ class TypeModel extends DBConnect
                         FROM  categories c
                         INNER JOIN page_url ppu
                         ON ppu.id = c.id_url
-                        WHERE ppu.url='$alias' ))
+                        WHERE ppu.url='$alias' )) AND p.deleted!=1
     ";
         if($position >= 0 &&  $qty>=0){
             $sql.=" LIMIT $position ,$qty";
@@ -40,7 +40,7 @@ class TypeModel extends DBConnect
                     FROM categories c 
                     INNER JOIN page_url u 
                     ON c.id_url = u.id
-                    WHERE u.url = '$alias')";
+                    WHERE u.url = '$alias')  AND p.deleted!=1";
 
         if($position >= 0 &&  $qty > 0 ){
             $sql.=" LIMIT $position , $qty ";
@@ -65,7 +65,7 @@ class TypeModel extends DBConnect
         SELECT COUNT(p.id) as soluong , c.name,pu.url
                 FROM products p
                 INNER JOIN categories c
-                ON p.id_type = c.id
+                ON p.id_type = c.id AND p.deleted!=1
                 INNER JOIN page_url pu 
                 ON pu.id = c.id_url
                 GROUP BY c.id
@@ -75,7 +75,7 @@ class TypeModel extends DBConnect
     function select_AllSize(){
         $sql = "SELECT  COUNT(products.id)  as soluong ,size.* 
                 FROM size ,  products 
-                WHERE  products.size = size.id_size
+                WHERE  products.size = size.id_size  
                 GROUP by  size.id_size";
         return $this->loadMoreRows($sql);
     }
@@ -84,7 +84,7 @@ class TypeModel extends DBConnect
         $sql  ="SELECT products.* , size.*, page_url.url
         FROM products , size,page_url
         WHERE products.size = size.id_size AND size.id_size = $id_Size
-         AND  page_url.id = products.id_url
+         AND  page_url.id = products.id_url 
         ";
         return $this->loadMoreRows($sql);
     }
@@ -92,7 +92,7 @@ class TypeModel extends DBConnect
         $sql = "
         SELECT products.* , size.* , page_url.url
         FROM products , size , page_url 
-        WHERE products.id_url = page_url.id AND products.size= size.id_size AND products.new =1 AND products.status = 1
+        WHERE products.id_url = page_url.id AND products.size= size.id_size AND products.new =1   AND products.status = 1 AND products.deleted != 1
         ORDER BY products.price DESC 
         LIMIT 0,5
         ";
@@ -100,7 +100,7 @@ class TypeModel extends DBConnect
     }
     function selectMaxPrice($minPrice , $maxPrice){
         $sql ="SELECT products.* , size.name_size, page_url.url FROM page_url,products , size
-              WHERE products.size = size.id_size and products.id_url = page_url.id AND products.price > $minPrice AND products.price < $maxPrice
+              WHERE products.size = size.id_size and products.id_url = page_url.id AND products.price > $minPrice AND products.price < $maxPrice  AND products.deleted!=1
               GROUP BY products.price DESC";
         return $this->loadMoreRows($sql);
     }

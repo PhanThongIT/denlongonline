@@ -7,13 +7,17 @@
  */
 @session_start();
 include_once 'Model/BillsModel.php';
+include_once 'Model/CategoriesModel.php';
 
 class BillsController
 {
     function getBillsByStatus()
     {
         $idStatus = $_GET['status'];
-
+      //  $model1 = new CategoriesModel();
+//        $menu = $model1->getMenu();
+//      print_r($menu);die;
+//        $_SESSION['menu'] =$menu;
 //        echo $idBill;die;
         $model         = new BillsModel();
         $getBillStatus = $model->selectBillByStatus($idStatus);

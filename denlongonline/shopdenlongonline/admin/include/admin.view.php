@@ -8,11 +8,11 @@
 //if(isset($_SESSION['menu'])){
 //    print_r($_SESSION['menu']);
 //}
-if (session_status() == PHP_SESSION_NONE)
-{
+if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-$menu = $_SESSION['menu'];
+   $menu = $_SESSION['menu'];
+//var_dump($menu);
 ?>
 
 <!DOCTYPE html>
@@ -29,6 +29,12 @@ include "header.php";
     ?>
     <!--sidebar start-->
     <aside>
+
+<!--        --><?php
+//        if(isset($viewmenu)){
+//            include ("$viewmenu");
+//        }
+//        ?>
         <div id="sidebar" class="nav-collapse ">
             <!-- sidebar menu start-->
             <ul class="sidebar-menu" id="nav-accordion">
@@ -53,6 +59,18 @@ include "header.php";
                 </li>
                 <li class="sub-menu">
                     <a href="javascript:;">
+                        <i class=" fa fa-envelope"></i>
+                        <span> Danh Mục Sản Phẩm </span>
+                    </a>
+                    <ul class="sub">
+                        <li><a id="level1" href="listlv1-categories.php?list1categories=lv1">Danh Mục Sản Phẩm Cấp 1 </a></li>
+                        <li><a id="level1" href="listlv1-categories.php?list2categories=lv2">Danh Mục Sản Phẩm Cấp 2 </a></li>
+                        <li><a id="level1" href="listlv1-categories.php?addcategories=add">Thêm Danh Mục Sản Phẩm</a></li>
+                    </ul>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="javascript:;">
                         <i class=" fa fa-bar-chart-o"></i>
                         <span>Charts</span>
                     </a>
@@ -69,9 +87,11 @@ include "header.php";
                         <span>Quản Lý Sản Phẩm</span>
                     </a>
                     <ul class="sub">
+                        <li><a href="addproduct.php?addproduct=name">Thêm Mới Sản Phẩm</a></li>
                         <li><a href="product_list.html">Sản Phẩm Khuyến mãi</a></li>
                         <li><a href="product_details.html">Sản Phẩm Giảm Giá</a></li>
                         <li><a href="product_details.html">Sản Phẩm TOP</a></li>
+                        <li><a href="list-delete-product.php?listdeleted=delete">Sản Phẩm Đã Xóa</a></li>
                     </ul>
                 </li>
                 <li>
@@ -121,6 +141,19 @@ include "header.php";
                         } ?>
                     </ul>
                 </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class=" fa fa-envelope"></i>
+                        <span>Quản Lý Khách Hàng </span>
+                    </a>
+                    <ul class="sub">
+
+                        <li><a id="1" href="list-customers.php?getlistCustomer=Customer">Danh Sách Khách Hàng</a></li>
+                        <li><a id="2" href="addcustomer.php?addcustomer=add">Thêm Mới Khách hàng</a></li>
+                        <li><a id="3" href="get-delete-customer.php?listcustomer=list">Khách Hàng Đã Xóa</a></li>
+                    </ul>
+                </li>
+
                 <!--multi level menu end-->
 
             </ul>

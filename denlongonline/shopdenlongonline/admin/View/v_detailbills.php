@@ -5,6 +5,17 @@
  * Date: 2018-07-24
  * Time: 3:24 AM
  */?>
+<style>
+    th {
+        text-align: center;
+        color: black;
+    }
+
+    td {
+        text-align: center;
+        color: black;
+    }
+</style>
 <div class="panel panel-default">
     <div class="panel-heading"><b>
             <h4><?php echo $title; ?>  - DH000<?= $getBill->id?> </h4>

@@ -1,7 +1,7 @@
 <?php
-session_start();
-//echo $_SESSION['fullname'];die;
-//
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 ?>
 
 <!DOCTYPE html>

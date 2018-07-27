@@ -1,3 +1,15 @@
+<style>
+    th {
+        text-align: center;
+        color: black;
+    }
+
+    td {
+        text-align: center;
+        color: black;
+    }
+</style>
+
 <div class="panel panel-default">
     <div class="panel-heading"><b>
             <h4><?php echo $title; ?></h4>
@@ -109,7 +121,7 @@
                 dataType: "JSON",
                 success: function (response) {
                     $('#status').html(response.status);
-                    $('#record').hide(1000);
+                    $('#record').remove();
                 },
                 error: function (error) {
                     console.log(error);
