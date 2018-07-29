@@ -98,7 +98,7 @@ $getNew_Sale_Sldier = $data['getNew_Sale'];
                                                                  alt="<?php echo $item->name ?>">
                                                         </figure>
                                                     </a>
-                                                    <button type="button" class="add-to-cart-mt">
+                                                    <button type="button" class="add-to-cart-mt " id-sp="<?= $item->id;?>>
                                                         <i class="fa fa-shopping-cart"></i>
                                                         <span> THÊM VÀO GIỎ HÀNG </span>
                                                     </button>

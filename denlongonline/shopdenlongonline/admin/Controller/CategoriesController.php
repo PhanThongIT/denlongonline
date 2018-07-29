@@ -15,17 +15,19 @@ include_once("Helper/String/trimUrl.php");
 
 class CategoriesController
 {
-    function getMenuPage()
+
+    public function getMenuPage()
     {
         $model = new CategoriesModel;
         $menu  = $model->getMenu();
 //        print_r($menu);die;
 //        $viewmenu  = "View/v_menu.php";
-        $_SESSION['menu'] = $menu;
-        //
+        //$_SESSION['menu'] = $menu;
 //       $viewmenu = "include/admin.view.php";
-        include("include/admin.view.php");
+       include('include/admin.view.php');
+
     }
+
 
     function selectMenuParent()
     {
@@ -42,8 +44,17 @@ class CategoriesController
     {
         $model     = new CategoriesModel();
         $checkMenu = $model->loadMenuType();
+       // echo "<pre>"; var_dump($checkMenu); echo "</pre>"; die;
         $title     = "DANH MỤC THỂ LOẠI SẢN PHẨM CẤP 2";
         $view      = "View/v_list2categories.php";
+        include("include/admin.view.php");
+    }
+    function getProductType(){
+        $model     = new CategoriesModel();
+        $checkMenu = $model->loadMenuType();
+        // echo "<pre>"; var_dump($checkMenu); echo "</pre>"; die;
+        $title     = "SẢN PHẨM THEO DANH MỤC ";
+        $view      = "View/v_listcateProduct.php";
         include("include/admin.view.php");
     }
 
@@ -137,16 +148,18 @@ class CategoriesController
         $view  = "View/v_edit-cate.php";
         include("include/admin.view.php");
     }
-    function updateCateLevel2(){
+
+    function updateCateLevel2()
+    {
 
         $idCate = $_GET['editcate-lv2'];
 
-        $model    = new CategoriesModel();
+        $model     = new CategoriesModel();
         $modelCate = new ProductModel();
 
         $loadCate = $model->loadCate($idCate);
 
-      //  $loadUrl  = $model->getNameUrlType($loadCate->id_url);
+        //  $loadUrl  = $model->getNameUrlType($loadCate->id_url);
 //       echo $loadCate->id_url;
 //       echo  $idCate;
 //       var_dump($loadUrl);die;
@@ -159,7 +172,7 @@ class CategoriesController
 //            echo $nameCate;
 //            echo $lowerUrl; die;
             $updateUrl  = $modelCate->updateUrl($loadCate->id_url, $lowerUrl);
-            $updateCate = $model->updateCateLevel2($loadCate->id, $nameCate, $loadCate->id_url,$loadCate->id_parent);
+            $updateCate = $model->updateCateLevel2($loadCate->id, $nameCate, $loadCate->id_url, $loadCate->id_parent);
             if ($updateCate)
             {
                 echo "<script>alert('CHỈNH SỬA THÀNH CÔNG  THỂ LOẠI')</script>";

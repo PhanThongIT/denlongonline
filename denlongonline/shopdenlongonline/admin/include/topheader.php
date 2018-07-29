@@ -240,9 +240,8 @@ if(!isset($_SESSION['fullname'])){
                 </a>
                 <ul class="dropdown-menu extended logout">
                     <div class="log-arrow-up"></div>
-                    <li><a href="#"><i class=" fa fa-suitcase"></i>Thông Tin</a></li>
-                    <li><a href="#"><i class="fa fa-cog"></i> Cài Đặt</a></li>
-                    <li><a href="#"><i class="fa fa-bell-o"></i> Thông báo</a></li>
+                    <li><a href="profile.php?profile=user"><i class=" fa fa-suitcase"></i>Thông Tin</a></li>
+
                     <li><a href="quantri.php?alias=logout"><i class="fa fa-key"></i> Đăng Xuất</a></li>
                 </ul>
             </li>

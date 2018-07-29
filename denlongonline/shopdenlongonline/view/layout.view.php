@@ -1,5 +1,6 @@
 <?php
-if (session_status() == PHP_SESSION_NONE) {
+if (session_status() == PHP_SESSION_NONE)
+{
     session_start();
 }
 ?>
@@ -110,7 +111,7 @@ if (session_status() == PHP_SESSION_NONE) {
                         <div class="headerlinkmenu col-lg-5 col-md-5 col-sm-4 col-xs-12">
                             <div class="links">
                                 <?php
-                                if(!isset($_SESSION['fullname']))
+                                if (!isset($_SESSION['fullname']))
                                 {
                                     ?>
                                     <div class="myaccount">
@@ -126,21 +127,25 @@ if (session_status() == PHP_SESSION_NONE) {
                                         </a>
                                     </div>
                                     <?php
-                                }else {
-                                ?>
-                                    <div >
-                                            <a title="<?php echo $_SESSION['fullname'] ?>">
-                                                <span class="hidden-xs">Chào, <h6> <?php echo $_SESSION['fullname'] ?></h6> </span>
-                                            </a>
+                                }
+                                else
+                                {
+                                    ?>
+                                    <div>
+                                        <a title="<?php echo $_SESSION['fullname'] ?>">
+                                            <span class="hidden-xs">Chào, <h6> <?php echo $_SESSION['fullname'] ?></h6> </span>
+                                        </a>
+                                        <a title="<?php echo "profile" ?>" href="admin/profile.php?profile=user">
+                                            <span class="hidden-xs">My Profile</span>
+                                        </a>
 
-
-                                            <a title="<?php echo "logOut" ?>" href="admin/quantri.php?alias=logout">
-                                                <span class="hidden-xs">Đăng Xuất </span>
-                                            </a>
+                                        <a title="<?php echo "logOut" ?>" href="admin/quantri.php?alias=logout">
+                                            <span class="hidden-xs">Đăng Xuất </span>
+                                        </a>
 
 
                                     </div>
-                                <?php }?>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>

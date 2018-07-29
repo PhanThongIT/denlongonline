@@ -33,9 +33,9 @@ class CategoriesModel extends DBConnect{
     }
    function loadMenuType(){
        $sql = "
-        select categories.* 
-        from categories
-        where categories.id_parent is not null
+        select categories.* ,page_url.url
+        from categories,page_url
+        where categories.id_url = page_url.id AND categories.id_parent is not null
         ";
        return  $this->loadMoreRows($sql);
    }

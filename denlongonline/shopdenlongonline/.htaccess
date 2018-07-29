@@ -3,6 +3,7 @@ RewriteEngine  on
 RewriteRule ^([a-zA-Z0-9-().]+)-([0-9]+)$ detail.php?alias=$1&id=$2
 
 RewriteRule ^([a-zA-Z0-9-]+)/page/([0-9]+)$ type.php?type=$1&page=$2
+RewriteRule ^([a-zA-Z0-9]+)/([0-9]+)$ activeOrder.php?token=$1&time=$2
 #nếu không có trang nào thì mặc =định là trang chủ
 RewriteRule ^([a-zA-Z0-9-]+)$ type.php?type=$1
 RewriteRule ^ErrorPage.html$ denlongonline/shopdenlongonline/404.php

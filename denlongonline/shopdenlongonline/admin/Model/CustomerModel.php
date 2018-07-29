@@ -18,6 +18,7 @@ class CustomerModel extends DBConnect
 ";
         return $this->loadMoreRows($sql);
     }
+
     function getListCustomerDel()
     {
         $sql = "
@@ -45,6 +46,43 @@ class CustomerModel extends DBConnect
     SET customers.status =0
     WHERE customers.id = $id 
         ";
+        return $this->executeQuery($sql);
+    }
+
+    function findEmail($email)
+    {
+        $sql = "select customers.* 
+            from customers 
+            where customers.email = '$email'";
+        return $this->loadOneRow($sql);
+    }
+
+    function insertCustomer($name, $gender, $email, $address, $phone, $note)
+    {
+        $sql = "
+        INSERT INTO customers (name, gender, email,address , phone, note , status)
+        VALUES ('$name','$gender','$email','$address','$phone','$note',0);
+        ";
+        return $this->executeQuery($sql);
+    }
+
+    function findCustomer($id)
+    {
+        $sql = "
+        SELECT customers.*  
+        from customers
+        where  customers.id = $id
+        ";
+        return $this->loadOneRow($sql);
+    }
+
+    function updateCustomer($id, $name, $gender, $email, $address, $phone, $note)
+    {
+        $sql = "
+        UPDATE customers
+        SET name = '$name', gender = '$gender', email = '$email',address= '$address', phone= '$phone',note= '$note', status =0 
+        WHERE id = $id; 
+";
         return $this->executeQuery($sql);
     }
 }

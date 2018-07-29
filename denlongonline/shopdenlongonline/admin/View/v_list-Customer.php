@@ -67,9 +67,9 @@
                     <td><?= $bills->phone; ?> (VNĐ)</td>
                     <td><?= $bills->note; ?></td>
                     <td>
-                        <button class="btn btn-primary btn-sm updateBill"
-                                type="submit" data-id="<?= $bills->id; ?>">Sửa
-                        </button>
+                        <a href="editcustomer.php?id=<?= $bills->id; ?>">
+                            <button style="margin-top: 10px;" class="btn btn-lock btn-sm btn-Edit">Sửa </button>
+                        </a>
                         <button class="btn btn-default btn-sm delete-Customer" type="submit"
                                 data-name="<?= $bills->name ?>" data-idHuy="<?= $bills->id; ?>">Xóa
                         </button>

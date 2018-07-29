@@ -13,7 +13,7 @@
     <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
     <link rel="shortcut icon" href="img/favicon.html">
 <base href="http://localhost:81/denlongonline/shopdenlongonline/admin/">
-    <title>FlatLab - Flat & Responsive Bootstrap Admin Template</title>
+    <title>ĐÈN LỒNG SHOP</title>
 
     <!-- Bootstrap core CSS -->
     <link href="Public/source/css/bootstrap.min.css" rel="stylesheet">
@@ -22,7 +22,7 @@
     <link href="Public/source/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="Public/source/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
     <link rel="stylesheet" href="Public/source/css/owl.carousel.css" type="text/css">
-
+    <script type="text/javascript" src="Public/ckeditor/ckeditor.js"></script>
     <!--right slidebar-->
     <link href="Public/source/css/slidebars.css" rel="stylesheet">
 
@@ -35,6 +35,7 @@
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
+
     <script src="Public/source/js/html5shiv.js"></script>
     <script src="Public/source/js/respond.min.js"></script>
     <![endif]-->

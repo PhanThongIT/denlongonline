@@ -194,7 +194,6 @@ $item_detail     = $data['get_DetailProduct'];
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12"style="text-align: center;" >
                     <div id="fb-root"></div>
                     <script>(function(d, s, id) {
                             var js, fjs = d.getElementsByTagName(s)[0];
@@ -203,9 +202,9 @@ $item_detail     = $data['get_DetailProduct'];
                             js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.1&appId=2153520284931557&autoLogAppEvents=1';
                             fjs.parentNode.insertBefore(js, fjs);
                         }(document, 'script', 'facebook-jssdk'));</script>
-                    <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-numposts="5"></div>                    <!-- Main Container End -->
+                    <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-numposts="3" style="width: auto ;align-content: center"></div>                    <!-- Main Container End -->
 
-                </div>
+
 
             </div>
         </div>

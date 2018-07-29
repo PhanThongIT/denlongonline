@@ -63,12 +63,11 @@ if (isset($_SESSION["fullname"]) AND $_SESSION["role"] == 'admin')
             <input type="email" name="email" class="form-control" placeholder="Email address" required autofocus>
             <input type="password" name="password" class="form-control" placeholder="Password" required>
 
-            <button class="btn btn-lg btn-primary btn-block btn-signin" name="btn-login" type="submit" name="login">Sign
-                in
+            <button class="btn btn-lg btn-primary btn-block btn-signin" name="btn-login" type="submit" name="login">Đăng Nhập
             </button>
         </form><!-- /form -->
-        <a href="#" class="forgot-password">
-            Forgot the password?
+        <a href="register.php?register=add" class="forgot-password">
+            Đăng ký tài khoản
         </a>
     </div><!-- /card-container -->
 

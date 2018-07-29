@@ -9,6 +9,7 @@ include_once 'model/OrderModel.php';
 include_once 'Controller.php';
 include_once 'helper/Cart/Cart.php';
 include_once 'helper/token/CreateToken.php';
+include_once 'helper/mailer/MailCheckout.php';
 session_start();
 
 class OrderController extends Controller
@@ -70,18 +71,91 @@ class OrderController extends Controller
                     $saveBillDetail = $model->saveDetailBills($saveBill, $id_product, $quantity, $price); // trả về true or false;
                     // kiểm tra giá trị trả về
                     //  Nếu k tồn tại thì xóa đơn hàng
-                    if(!$saveBillDetail){
-                        // nếu không có sane phẩm thì ROLLBACK lại
-
+                    if (!$saveBillDetail)
+                    {
+                        // nếu không có sane phẩm thì xóa Bill và xóa Khách hàng
+                        $model->deleteCustomer($idCustomer);
+                        $model->deleteBill($saveBill);
+                        $model->deleteBillDetail($saveBill);
+                        echo "<script>alert('LƯU ĐƠN HÀNG THẤT BẠI ')</script>";
+                        echo "<script>window.location='checkout.php'</script>";
+                        return;
                     }
-
-
                 }
+                // send mail kèm 1 token adtive lên gmail
+                // tạo ra 1 đường dẫn trên url
+                $linkActive = "http://localhost:81/denlongonline/shopdenlongonline/$token/$token_date";
+                $subject    = "XÁC NHẬN ĐƠN HÀNG - DH000$saveBill";
+                $content    = "<did>Chào bạn, $name!</did>
+                            <div>SỰ HÀI LÒNG CỦA BẠN LÀ DANH DỰ CỦA CHÚNG TÔI - SHOP ĐÈN LỒNG ONLINE</b>.
+                            <br></div>
+                            <div>Thời gian đặt mua hàng :$date_Order</b>.
+                            <br></div>
+                            <div>Cảm ơn bạn đã đặt hàng, tổng tiền thanh toán là: <b>" . number_format($promt_price) . " vnđ</b>.
+                            <br></div>
+                            <div>Vui lòng chọn vào <a href='$linkActive'>đây</a> để xác nhận đơn hàng.</div>";
+
+                // Gọi mailcheckout để send mail lên cho người  mua
+
+                sendMail($email, $name, $subject, $content);
+                unset($_SESSION['cart']);
+                echo "<script>alert('GỬI THÀNH CÔNG ! VUI LÒNG XÁC NHẬN ĐƠN HÀNG ')</script>";
+                echo "<script>window.location='order.php'</script>";
+                return;
+
             }
-
-
+            else
+            {
+                // Nếu k tồn tại idBill thì xóa  khách hàng
+                $model->deleteCustomer($idCustomer);
+                echo "<script>alert('XÁC NHẬN ĐƠN HÀNG THẤT BẠI ')</script>";
+                echo "<script>window.location='order.php'</script>";
+                return;
+            }
+        }
+        else
+        {
+            echo "<script>alert('XÁC NHẬN ĐƠN HÀNG THẤT BẠI ')</script>";
+            echo "<script>window.location='order.php'</script>";
+            return;
         }
     }
+
+    function ActiveOrder()
+    {
+        $token   = $_GET['token'];
+        $oldTime = $_GET['time'];
+        $nowTime = strtotime(date('Y-m-d H:i:s', time()));
+        if ($nowTime - $oldTime <= 86400 * 3)
+        {
+            $model = new OrderModel();
+            $bill  = $model->findBillByToken($token);
+            if ($bill)
+            {
+                //update status
+                //print_r($bill);die;
+                $model->updateStatusBill($bill->id);
+               // $_SESSION['success'] = "Cảm ơn bạn đã xác nhận, chúng tôi sẽ liên lạc trong ít phút";
+                echo "<script>alert('CẢM ƠN BẠN ĐÃ XÁC NHẬN ĐƠN HÀNG ! SHOP ĐÈN LỒNG ONLINE SẼ LIÊN HỆ VỚI BẠN ')</script>";
+               // echo "<script>window.location='http://localhost:81/denlongonline/shopdenlongonline/order.php'</script>";
+                return;
+            }
+            else
+            {
+                echo "<script>alert('XÁC NHẬn ĐƠN HÀNG LỖI ! VUI LÒNG KIỂM TRA ')</script>";
+               // echo "<script>window.location='http://localhost:81/denlongonline/shopdenlongonline/order.php'</script>";
+                return;
+            }
+        }
+        else
+        {
+            echo "<script>alert('QUÁ THỜI GIAN XÁC NHẬN ĐƠN HÀNG  ')</script>";
+       //echo "<script>window.location='http://localhost:81/denlongonline/shopdenlongonline/order.php'</script>";
+            return;
+        }
+        header("location:http://localhost:81/denlongonline/shopdenlongonline/order.php");
+    }
+
 
 }
 
