@@ -24,11 +24,13 @@ class LoginController
             {
                 if (isset($_SESSION["fullname"]))
                 {
-                    header('location:include/admin.view.php');
+                    $_SESSION['email'] = $email;
+                    header('location:chartprice.php?chartprice=true');
                 }
             }elseif($selectLogin->role == 'customer'){
-                if (isset($_SESSION["fullname"]))
+                if (isset($_SESSION["fullname"]) )
                 {
+                    $_SESSION['email'] = $email;
                     header('location:../index.php');
                 }
             }

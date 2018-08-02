@@ -44,7 +44,9 @@ class HomeModel extends DBConnect
                 LIMIT 0,3";
         return $this->loadMoreRows($sql);
     }
-    function select_DenLongHoiAn (){
+
+    function select_DenLongHoiAn()
+    {
         $sql = "SELECT products.* , page_url.url
         FROM  products , page_url 
         WHERE products.id_url = page_url.id
@@ -54,6 +56,21 @@ class HomeModel extends DBConnect
         return $this->loadMoreRows($sql);
     }
 
+    function selectTopProduct()
+    {
+        $sql = "
+        SELECT p.*, u.url, sum(d.quantity) as qty
+                FROM products p 
+                INNER JOIN bill_detail d 
+                ON p.id = d.id_product
+                INNER JOIN page_url u 
+                ON u.id = p.id_url
+                GROUP BY d.id_product
+                ORDER BY qty DESC
+              
+        ";
+        return $this->loadMoreRows($sql);
+    }
 
 }
 

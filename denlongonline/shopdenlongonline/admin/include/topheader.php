@@ -236,12 +236,12 @@ if(!isset($_SESSION['fullname'])){
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                     <img alt="" src="img/avatar1_small.jpg">
                     <span class="username">Chào, <?php echo  $_SESSION['fullname'];?></span>
+
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu extended logout">
                     <div class="log-arrow-up"></div>
-                    <li><a href="profile.php?profile=user"><i class=" fa fa-suitcase"></i>Thông Tin</a></li>
-
+                    <li><a  href="profile.php?profile=user"><i  class=" fa fa-suitcase"></i>Thông Tin</a></li>
                     <li><a href="quantri.php?alias=logout"><i class="fa fa-key"></i> Đăng Xuất</a></li>
                 </ul>
             </li>

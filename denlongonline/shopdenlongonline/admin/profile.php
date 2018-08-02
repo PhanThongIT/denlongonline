@@ -10,7 +10,7 @@ $view  = new ProfileController();
  if(isset($_GET['profile'])){
      $view->getProfilePage();
  }
- elseif(isset($_POST[''])){
+ if(isset($_POST['btn-Update'])){
      $view->editProfile();
  }
 $view->getProfilePage();

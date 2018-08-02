@@ -6,14 +6,12 @@
  * Time: 2:59 PM
  */
 include_once 'Model/RegisterModel.php';
-
 class RegisterController
 {
     function getRegisterPage()
     {
         include_once("View/v_register.php");
     }
-
     function getRegister()
     {
         // Lấy dự liệu từ form về
@@ -53,7 +51,6 @@ class RegisterController
                 $gender  = $_POST['gender'];
                 $address = $_POST['address'];
                 $phone   = $_POST['phone'];
-
                 $update_date = date('Y-m-d H:m:s', time());
                 $insert_User = $model->insertUser($username, $password, $fullname, $birth_date, $gender, $address, $email, $phone, $update_date);
                 //echo "<pre>"; var_dump($insert_User); echo "</pre>"; die;
@@ -75,7 +72,6 @@ class RegisterController
                         echo "<script>window.location='register.php?register=add'</script>";
                         return;
                     }
-
                 }
                 else
                 {
@@ -91,12 +87,9 @@ class RegisterController
                 return;
             }
 //
-
         }
     }
     function getProfile(){
-
     }
 }
-
 ?>

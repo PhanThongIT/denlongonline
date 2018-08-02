@@ -37,13 +37,6 @@ include "header.php";
         <div id="sidebar" class="nav-collapse ">
             <!-- sidebar menu start-->
             <ul class="sidebar-menu" id="nav-accordion">
-                <li>
-                    <a class="active" href="index.html">
-                        <i class="fa fa-dashboard"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-
                 <li class="sub-menu">
                     <a href="javascript:;">
                         <i class=" fa fa-envelope"></i>
@@ -74,9 +67,9 @@ include "header.php";
                         <span>Charts</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="morris.html">Quản Lý Bài Viết</a></li>
-                        <li><a href="chartjs.html">Quản Lý Khách Hàng</a></li>
-                        <li><a href="flot_chart.html">Quản Lý Sản Phẩm</a></li>
+                        <li><a href="chartproduct.php?chartproduct=true">Thống kê sản phẩm</a></li>
+                        <li><a href="charttopsale.php?charttopsale=true">Sản phẩm bán chạy</a></li>
+                        <li><a href="chartprice.php?chartprice=true">Doanh thu theo sản phẩm</a></li>
                         <li><a href="xchart.html">xChart</a></li>
                     </ul>
                 </li>

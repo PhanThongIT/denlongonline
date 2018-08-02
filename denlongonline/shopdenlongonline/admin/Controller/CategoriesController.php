@@ -24,7 +24,8 @@ class CategoriesController
 //        $viewmenu  = "View/v_menu.php";
         //$_SESSION['menu'] = $menu;
 //       $viewmenu = "include/admin.view.php";
-       include('include/admin.view.php');
+
+        include('include/admin.view.php');
 
     }
 

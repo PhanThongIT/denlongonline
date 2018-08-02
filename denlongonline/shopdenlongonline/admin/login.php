@@ -6,7 +6,7 @@
  * Time: 2:39 PM
  */
 //session_start();
-if (isset($_SESSION["fullname"]) AND $_SESSION["role"] == 'admin')
+if (isset($_SESSION["fullname"]) AND isset($_SESSION['email']) AND $_SESSION["role"] == 'admin')
 {
     header('location:quantri.php');
 }
@@ -45,14 +45,9 @@ if (isset($_SESSION["fullname"]) AND $_SESSION["role"] == 'admin')
 </head>
 
 <body>
+
 <div class="container">
-    <?php
-    if (isset($_SESSION["error"]))
-    {
-        echo '<script type="text/javascript">alert("Sai thông tin đăng nhập");</script>';
-        unset($_SESSION["error"]);
-    }
-    ?>
+
     <div class="card card-container">
         <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
 
@@ -69,6 +64,11 @@ if (isset($_SESSION["fullname"]) AND $_SESSION["role"] == 'admin')
         <a href="register.php?register=add" class="forgot-password">
             Đăng ký tài khoản
         </a>
+        <br>
+        <a href="../index.php" class="btn-Back">
+            Trở về trang chủ Trang Chủ
+        </a>
+
     </div><!-- /card-container -->
 
 </div><!-- /container -->

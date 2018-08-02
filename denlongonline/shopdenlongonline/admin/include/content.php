@@ -12,10 +12,12 @@
 
             <section class="content">
                 <?php
-                if(isset($view)){
-                    include ("$view");
+                if (isset($view))
+                {
+                    include("$view");
                 }
                 ?>
+
             </section>
         </div>
     </section>

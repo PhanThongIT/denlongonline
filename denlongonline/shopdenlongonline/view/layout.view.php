@@ -157,7 +157,7 @@ if (session_status() == PHP_SESSION_NONE)
                         <!-- Header Logo -->
                         <div class="logo">
                             <a title="e-commerce" href="index.php">
-                                <img alt="responsive theme logo" src="public/source/images/logo.png">
+                                <img alt="responsive theme logo" src="http://denlongviet.vn/wp-content/uploads/2018/03/den-long-viet-stie-logo.png">
                             </a>
                         </div>
                         <!-- End Header Logo -->
@@ -190,20 +190,25 @@ if (session_status() == PHP_SESSION_NONE)
 
                     <div class="col-lg-3 col-xs-3 top-cart">
                         <div class="top-cart-contain">
+                            <?php
+                            if(isset($_SESSION['cart'])){
+                            ?>
                             <div class="mini-cart">
-                                <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle">
-                                    <a href="order.php">
+                                <div  class="basket dropdown-toggle">
+
+                                    <a href="mycart.php">
                                         <div class="cart-icon">
                                             <i class="fa fa-shopping-cart"></i>
                                         </div>
                                         <div class="shoppingcart-inner hidden-xs">
-                                            <span class="cart-title">Giỏ hàng của bạn </span>
-                                            <span class="cart-total">4 Item(s): $520.00</span>
+                                            <span>Giỏ hàng của bạn</span>
                                         </div>
                                     </a>
+
                                 </div>
 
                             </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -295,16 +300,25 @@ if (session_status() == PHP_SESSION_NONE)
                             </li>
                             <li class="mt-root">
                                 <div class="mt-root-item">
-                                    <a href="about_us.html">
+                                    <a href="aboutus.php">
                                         <div class="title title_font">
-                                            <span class="title-text">Thông Tin</span>
+                                            <span class="title-text">Giới Thiệu</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="mt-root">
+                                <div class="mt-root-item">
+                                    <a href="setting.php">
+                                        <div class="title title_font">
+                                            <span class="title-text">Hướng Dẫn</span>
                                         </div>
                                     </a>
                                 </div>
                             </li>
                             <li class="mt-root demo_custom_link_cms">
                                 <div class="mt-root-item">
-                                    <a href="blog_full_width.html">
+                                    <a href="post.php">
                                         <div class="title title_font">
                                             <span class="title-text">Bài Viết</span>
                                         </div>

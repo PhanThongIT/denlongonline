@@ -29,7 +29,7 @@ class DetailController extends Controller
             'getRelated_Product' => $getRelated_Product
         ];
         return $this->loadView('detail', $data, "CHI TIẾT");
-           }
+    }
 }
 
 ?>
