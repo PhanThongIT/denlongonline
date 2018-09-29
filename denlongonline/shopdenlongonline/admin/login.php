@@ -14,7 +14,7 @@ if (isset($_SESSION["fullname"]) AND isset($_SESSION['email']) AND $_SESSION["ro
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <base href="http://localhost:81/denlongonline/shopdenlongonline/admin/">
+    <base href="http://localhost:8080/denlongonline/denlongonline/shopdenlongonline/admin/">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">

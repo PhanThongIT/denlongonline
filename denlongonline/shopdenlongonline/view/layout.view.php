@@ -15,10 +15,10 @@ if (session_status() == PHP_SESSION_NONE)
     <!--[if IE]>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <![endif]-->
-    <base href="http://localhost:81/denlongonline/shopdenlongonline/">
+    <base href="http://localhost:8080/denlongonline/denlongonline/shopdenlongonline/">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title><?= $title ?> </title>
-    <base href="http://localhost:81/denlongonline/shopdenlongonline/">
+    <base href="http://localhost:8080/denlongonline/denlongonline/shopdenlongonline/">
     <meta name="description"
           content="best template, template free, responsive theme, fashion store, responsive theme, responsive html theme, Premium website templates, web templates, Multi-Purpose Responsive HTML5 Template">
     <meta name="keywords"

@@ -12,7 +12,7 @@
     <meta name="author" content="Mosaddek">
     <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
     <link rel="shortcut icon" href="img/favicon.html">
-<base href="http://localhost:81/denlongonline/shopdenlongonline/admin/">
+<base href="http://localhost:8080/denlongonline/denlongonline/shopdenlongonline/admin/">
     <title>ĐÈN LỒNG SHOP</title>
 
     <!-- Bootstrap core CSS -->

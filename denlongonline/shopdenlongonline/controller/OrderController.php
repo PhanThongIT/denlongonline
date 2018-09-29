@@ -84,7 +84,7 @@ class OrderController extends Controller
                 }
                 // send mail kèm 1 token adtive lên gmail
                 // tạo ra 1 đường dẫn trên url
-                $linkActive = "http://localhost:81/denlongonline/shopdenlongonline/$token/$token_date";
+                $linkActive = "http://localhost:8080/denlongonline/denlongonline/shopdenlongonline/$token/$token_date";
                 $subject    = "XÁC NHẬN ĐƠN HÀNG - DH000$saveBill";
                 $content    = "<did>Chào bạn, $name!</did>
                             <div>SỰ HÀI LÒNG CỦA BẠN LÀ DANH DỰ CỦA CHÚNG TÔI - SHOP ĐÈN LỒNG ONLINE</b>.
