@@ -37,8 +37,7 @@
                             <label class="required">Size</label>
                             <select class="input form-control" name="sizeproduct" id="sizeproduct">
                                 <?php
-                                foreach ($getSize as $itemSize)
-                                {
+                                foreach ($getSize as $itemSize) {
                                     ?>
                                     <option value="<?= $itemSize->id_size ?>"><?= $itemSize->name_size ?>
                                         (<?= $itemSize->note; ?>)
@@ -55,15 +54,15 @@
                         <div class="col-sm-6 check-number">
 
                             <label class="required">Đơn Giá (Chưa khuyến mãi)</label>
-                            <input class="input form-control " type="text" name="priceproduct" id="priceproduct"
-                                   value="" required>
+                            <input class="input form-control " type="number" name="priceproduct" id="priceproduct"
+                                   value="" >
 
                         </div><!--/ [col] -->
                         <div class="col-sm-6">
 
                             <label class="required">Đơn Giá ( Khuyến mãi)</label>
-                            <input class="input form-control check-number-promt " type="text" name="promt_product"
-                                   id="promt_product" required>
+                            <input class="input form-control check-number-promt " type="number" name="promt_product"
+                                   id="promt_product">
 
                         </div><!--/ [col] -->
 
@@ -90,8 +89,7 @@
                             <label class="required">Loại Sản Phẩm</label>
                             <select class="input form-control" name="typeproduct" id="typeproduct">
                                 <?php
-                                foreach ($getNameTypelv1 as $itemType)
-                                {
+                                foreach ($getNameTypelv1 as $itemType) {
                                     ?>
                                     <option value="<?= $itemType->id ?>"><?= $itemType->name ?></option>
                                 <?php } ?>
@@ -129,7 +127,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <input type="text" class="input form-control" name="resulturl" id="resulturl" value=""
-                                       disabled >
+                                       disabled>
                             </div>
 
                         </div><!--/ [col] -->
@@ -165,12 +163,15 @@
         </form>
     </div>
 </div>
+
+<!--Script check input in add  products-->
 <script src="Public/source/js/jquery.js"></script>
 <script>
     $(document).ready(function () {
         $('.check-number').keyup(function () {
             var soluong = $('#priceproduct').val();
-            // console.log(soluong);
+
+            //check number input
             if (isNaN(soluong) || soluong <= 0) {
                 alert("Nhập Sai dữ liệu \n Vui lòng nhập vào số.");
                 $('#priceproduct').val('');
@@ -180,7 +181,7 @@
         });
         $('.check-number-promt').keyup(function () {
             var soluong = $('#promt_product').val();
-            // console.log(soluong);
+
             if (isNaN(soluong) || soluong <= 0) {
                 alert("Nhập Sai dữ liệu \n Vui lòng nhập vào số.");
                 $('#promt_product').val('');
@@ -190,21 +191,13 @@
         });
 
 
+        $('.check-url').keyup(function () {
+            var url = $('#urlproduct').val();
+            var result = change_alias(url);
+            var text = result.split(' ').join('');
 
-            $('.check-url').keyup(function () {
-                var url = $('#urlproduct').val();
-                // console.log(soluong);
-                var result = change_alias(url);
-                var text = result.split(' ').join('');
-                $('#resulturl').value(text);
-                //  console.log(result);
-                // if(isNaN(soluong) || soluong <= 0 ){
-                //     alert("Nhập Sai dữ liệu \n Vui lòng nhập vào số.");
-                //     $('#urlproduct').val('');
-                //     $('#urlproduct').focus();
-                //     return;
-                // }
-            });
+            $('#resulturl').value(text);
+        });
     })
 </script>
 

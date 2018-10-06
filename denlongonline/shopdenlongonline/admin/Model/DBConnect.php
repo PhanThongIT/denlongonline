@@ -4,8 +4,8 @@ class DBConnect{
     
     private $connect = NULL;
 
-    function __construct($dbName = 'denlongonline',$user = 'root', $password=''){
-        $this->connect = new PDO("mysql:host=localhost;dbname=$dbName;port=3307",$user,$password);
+    function __construct($dbName = 'denlongonline',$user = 'root', $password='phanthong'){
+        $this->connect = new PDO("mysql:host=localhost;dbname=$dbName;port=3306",$user,$password);
         $this->connect->exec("set names utf8");
     }
 

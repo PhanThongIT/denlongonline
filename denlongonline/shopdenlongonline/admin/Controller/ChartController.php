@@ -9,37 +9,62 @@ include "Model/ChartModel.php";
 
 class ChartController
 {
+    /**
+     * function getChartProductPage
+     *
+     * get data from tables Products, Bills, Details Bill
+     */
     function getChartProductPage()
     {
-        $model        = new ChartModel();
-        $countAllPro  = $model->selectAllProduct(); //all sản phẩm
-        $countNewPro  = $model->selectNewProduct();
+        $model = new ChartModel();
+
+        // get data from Model.
+        $countAllPro = $model->selectAllProduct();
+        $countNewPro = $model->selectNewProduct();
         $countSalePro = $model->selectSaleProduct();
         $countSpecPro = $model->selectSpecialProduct();
-        // print_r( $countAllPro);die;
+
+        //set view, title
         $title = "THỐNG KÊ LOẠI SẢN PHẨM TRONG SHOP";
-        $view  = "View/v_chartproduct.php";
+        $view = "View/v_chartproduct.php";
         include "include/admin.view.php";
     }
 
+    /**
+     * function getChartTopBill
+     *
+     * get data from tables Products, Bills, Details Bill
+     */
     function getChartTopBill()
     {
-        $model     = new ChartModel();
-        $topBill   = $model->selectTopSale();
+        $model = new ChartModel();
+
+        // Call data from Model
+        $topBill = $model->selectTopSale();
         $getAllPro = $model->getAllQuantityPro();
-        $title     = "THỐNG KÊ SỐ LƯỢNG SẢN PHẨM BÁN ĐƯỢC";
-        $view      = "View/v_charttopsale.php";
+
+        // set view and title.
+        $title = "THỐNG KÊ SỐ LƯỢNG SẢN PHẨM BÁN ĐƯỢC";
+        $view = "View/v_charttopsale.php";
         include "include/admin.view.php";
     }
 
+    /**
+     * function getChartPricePage
+     *
+     * get data from tables Products, Bills, Details Bill
+     */
     function getChartPricePage()
     {
-        $model      = new ChartModel();
+        $model = new ChartModel();
+
+        //get data from Model
         $getTopPrice = $model->selectTopPrice();
-        $getAllPrice =$model->getAllPrice();
-        //echo "<pre>"; var_dump($getTopSale); echo "</pre>"; die;
-        $title      = "THỐNG KÊ DOANH THU THEO SẢN PHẨM";
-        $view       = "View/v_charttopprice.php";
+        $getAllPrice = $model->getAllPrice();
+
+        //set view and title.
+        $title = "THỐNG KÊ DOANH THU THEO SẢN PHẨM";
+        $view = "View/v_charttopprice.php";
         include "include/admin.view.php";
     }
 

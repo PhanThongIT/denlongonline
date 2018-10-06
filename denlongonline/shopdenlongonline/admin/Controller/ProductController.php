@@ -7,35 +7,49 @@
  */
 include_once "Model/ProductModel.php";
 include_once "Helper/String/trimUrl.php";
+include_once "Helper/constants.php";
 
 class ProductController
 {
+
+    /**
+     * function getProductByType
+     *
+     */
     function getProductByType()
     {
-        $alias               = $_GET['alias'];
-        $model               = new ProductModel();
+        //get Model and alias with method GET
+        $alias = $_GET['alias'];
+
+        $model = new ProductModel();
+
+        // get Data from Model
         $selectProductByType = $model->select_Menu_productlv1($alias);
-        $getNameMenu         = $model->getNameMenu($alias);
-        $title               = "DANH SÁCH SẢN PHẨM THEO THỂ LOẠI " .$getNameMenu->name;
-        $view                = "View/v_product.php";
-        include("include/admin.view.php");
+        $getNameMenu = $model->getNameMenu($alias);
+
+        //set title and view
+        $title = TITLE_GET_PRODUCT_BY_TYPES . $getNameMenu->name;
+        $view = "View/v_product.php";
+        include(DIRECTORY_ADMIN_VIEW);
     }
 
     function deleteProduct()
     {
-        $idProduct     = $_POST['idproduct'];
-        $model         = new ProductModel();
+        //get id products
+        $idProduct = $_POST['idproduct'];
+
+        //get data from Model
+        $model = new ProductModel();
         $deleteProduct = $model->getDeleteProduct($idProduct);
-        if ($deleteProduct)
-        {
+
+        //check exist product
+        if ($deleteProduct) {
             echo json_encode([
-                'status' => "ĐÃ XÓA SẢN PHẨM THÀNH CÔNG!"
+                'status' => MESSAGE_DELETE_SUCCESS
             ]);
-        }
-        else
-        {
+        } else {
             echo json_encode([
-                'status' => "XÓA SẢN PHẨM THẤT BẠI"
+                'status' => MESSAGE_DELETE_FAIL
             ]);
         }
 
@@ -43,31 +57,37 @@ class ProductController
 
     function getListProductDelete()
     {
-        $alias         = $_GET['listdeleted'];
-        $model         = new ProductModel();
+        //get alias with method GET
+        $alias = $_GET['listdeleted'];
+
+        $model = new ProductModel();
+
+        // get data from function of Model
         $getlistDelete = $model->getListProductDelete($alias);
-//        print_r($getlistDelete);die;
-//        $getNameMenu  = $model->getNameMenu($alias);
-        $title = "DANH SÁCH SẢN PHẨM ĐÃ BỊ XÓA ";
-        $view  = "View/v_list-delete-product.php";
-        include("include/admin.view.php");
+
+        //setting view
+        $title = TITLE_LIST_PRODUCT_DELETE;
+        $view = "View/v_list-delete-product.php";
+        include(DIRECTORY_ADMIN_VIEW);
     }
 
     function rollbackProduct()
     {
-        $idProduct       = $_POST['idproduct'];
-        $model           = new ProductModel();
+        //get id with method POST
+        $idProduct = $_POST['idproduct'];
+
+        //get data from Model
+        $model = new ProductModel();
         $rollBackProduct = $model->getRollbackProduct($idProduct);
-        if ($rollBackProduct)
-        {
+
+        //check exist Product and show messages
+        if ($rollBackProduct) {
             echo json_encode([
-                'status' => "ĐÃ KHÔI PHỤC TRẠNG THÁI SẢN PHẨM THÀNH CÔNG "
+                'status' => ROLLBACK_STATUS_PRODUCT_SUCCESS
             ]);
-        }
-        else
-        {
+        } else {
             echo json_encode([
-                'status' => "KHÔI PHỤC SẢN PHẨM THẤT BẠI"
+                'status' => ROLLBACK_STATUS_PRODUCT_FAIL
             ]);
         }
 
@@ -76,99 +96,152 @@ class ProductController
     function AddProduct()
     {
 
+        $model = new ProductModel();
 
-        $model          = new ProductModel();
+        //get data from Model
         $getNameTypelv1 = $model->getNameTypeLv1();
-        $getSize        = $model->getSize();
-        if (isset($_POST['btn-Add']))
-        {
-            $url          = $_POST['urlproduct'];
-            $preg_Url     = utf8convert($url);
-            $lowerUrl     = strtolower(str_replace(' ', '', $preg_Url));
-            $check_Id_Url = $model->insertUrl($lowerUrl);
-            if ($check_Id_Url)
-            {
-                $name         = $_POST['nameproduct'];
-                $size         = $_POST['sizeproduct'];
-                $price        = $_POST['priceproduct'];
-                $promt_price  = $_POST['promt_product'];
-                $detail       = $_POST['detailproduct'];
-                $detail_promt = $_POST['promotion_price'];
-                $idType       = $_POST['typeproduct'];
-                $status       = $_POST['statusproduct'];
-                $new          = $_POST['newproduct'];
+        $getSize = $model->getSize();
 
-                $deleted       = $_POST['deletedproduct'];
-                $image         = $_FILES["hinh"]["error"] == 0 ? $_FILES["hinh"]["name"] : "";
-                $getUrlType    = $model->getUrlType($idType);
-                $insertProduct = $model->insertProduct($name, $size, $price, $promt_price, $check_Id_Url, $detail, $detail_promt, $idType, $status, $new, $deleted, $image);
-                if ($insertProduct)
-                {
-                    if ($_FILES["hinh"]["error"] == 0)
-                    {
-                        $kqa = move_uploaded_file($_FILES["hinh"]["tmp_name"], "../Public/source/images/products/$image");
+        // check submit button with method POST
+        if (isset($_POST['btn-Add'])) {
+
+            // get alias product with method POST
+            $url = $_POST['urlproduct'];
+            $pregUrl = utf8convert($url);
+            $lowerUrl = strtolower(str_replace(' ', '', $pregUrl));
+            $checkIdUrl = $model->insertUrl($lowerUrl);
+
+            if ($checkIdUrl) {
+
+                //get conditions with method POST
+                $name = $_POST['nameproduct'];
+                $size = $_POST['sizeproduct'];
+                $price = $_POST['priceproduct'];
+                $promtPrice = $_POST['promt_product'];
+                $detail = $_POST['detailproduct'];
+                $detailPromt = $_POST['promotion_price'];
+                $idType = $_POST['typeproduct'];
+                $status = $_POST['statusproduct'];
+                $new = $_POST['newproduct'];
+                $deleted = $_POST['deletedproduct'];
+                $image = $_FILES["hinh"]["error"] == 0 ? $_FILES["hinh"]["name"] : "";
+
+                // get data from Model
+                $getUrlType = $model->getUrlType($idType);
+                $insertProduct = $model->insertProduct(
+                    $name,
+                    $size,
+                    $price,
+                    $promtPrice,
+                    $checkIdUrl,
+                    $detail,
+                    $detailPromt,
+                    $idType,
+                    $status,
+                    $new,
+                    $deleted,
+                    $image
+                );
+
+                //check insert exist
+                if ($insertProduct) {
+                    if ($_FILES["hinh"]["error"] == 0) {
+                        $kqa = move_uploaded_file($_FILES["hinh"]["tmp_name"],
+                            "../Public/source/images/products/$image");
 
                     }
-                    echo "<script>alert('Thêm thành công Sản phẩm')</script>";
+
+                    //Show message success and redirect
+                    echo "<script>alert(" . MESSAGE_ADD_PRODUCT_SUCCESS .")</script>";
                     echo "<script>window.location='product.php?alias=$getUrlType->url'</script>";
 
 
                 }
             }
-            // lấy tất cả các thuộc tính
-
         }
-        $title = "THÊM SẢN PHẨM LỒNG ĐÈN ";
-        $view  = "View/v_AddProduct.php";
-        include_once("include/admin.view.php");
+
+        // set title and view
+        $title = TITLE_ADD_PRODUCT;
+        $view = "View/v_addproduct.php";
+        include(DIRECTORY_ADMIN_VIEW);
     }
 
     function EditProduct()
     {
-        $model          = new ProductModel();
+        $model = new ProductModel();
+
+        // get id product with  method GET
+        $idProduct = $_GET['editproduct'];
+
+        //get data from Model
         $getNameTypelv1 = $model->getNameTypeLv1();
-        $getSize        = $model->getSize();
-        $idProduct      = $_GET['editproduct'];
-        if ($idProduct)
-        {
+        $getSize = $model->getSize();
+
+        //check exist Product
+        if ($idProduct) {
             $getProductByID = $model->getProductByID($idProduct);
-            if (isset($_POST['btn-Edit']))
-            {
-                $url          = $_POST['urlproduct'];
-                $preg_Url     = utf8convert($url);
-                $lowerUrl     = strtolower(str_replace(' ', '', $preg_Url));
-                $check_Id_Url = $model->updateUrl($getProductByID->id_url, $lowerUrl);
-                $name         = $_POST['nameproduct'];
-                $size         = $_POST['sizeproduct'];
-                $price        = $_POST['priceproduct'];
-                $promt_price  = $_POST['promt_product'];
-                $detail       = $_POST['detailproduct'];
-                $detail_promt = $_POST['promotion_price'];
-                $idType       = $_POST['typeproduct'];
-                $status       = $_POST['statusproduct'];
-                $new          = $_POST['newproduct'];
-                $deleted       = $_POST['deletedproduct'];
-                $image         = $_FILES["hinh"]["error"] == 0 ? $_FILES["hinh"]["name"] : "";
-                $getUrlType    = $model->getUrlType($idType);
-                //updateProduct($id,$name,$size,$price , $promt_price,$url,$detail ,$detail_promt ,$idType ,$status ,$new,$deleted, $image)
-                $updateProduct = $model->updateProduct($getProductByID->id,$name, $size, $price, $promt_price, $getProductByID->id_url, $detail, $detail_promt, $idType, $status, $new, $deleted, $image);
-                if ($updateProduct)
-                {
-                    if ($_FILES["hinh"]["error"] == 0)
-                    {
-                        $kqa = move_uploaded_file($_FILES["hinh"]["tmp_name"], "../Public/source/images/products/$image");
 
+            //check exist submit btn Edit.
+            if (isset($_POST['btn-Edit'])) {
+
+                // get alias product with method POST
+                $url = $_POST['urlproduct'];
+                $pregUrl = utf8convert($url);
+                $lowerUrl = strtolower(str_replace(' ', '', $pregUrl));
+                $checkIdUrl = $model->updateUrl(
+                    $getProductByID->id_url,
+                    $lowerUrl
+                );
+
+                // set data input from form
+                $name = $_POST['nameproduct'];
+                $size = $_POST['sizeproduct'];
+                $price = $_POST['priceproduct'];
+                $promtPrice = $_POST['promt_product'];
+                $detail = $_POST['detailproduct'];
+                $detailPromt = $_POST['promotion_price'];
+                $idType = $_POST['typeproduct'];
+                $status = $_POST['statusproduct'];
+                $new = $_POST['newproduct'];
+                $deleted = $_POST['deletedproduct'];
+                $image = $_FILES["hinh"]["error"] == 0 ? $_FILES["hinh"]["name"] : "";
+
+                //get function from Model.
+                $getUrlType = $model->getUrlType($idType);
+                $updateProduct = $model->updateProduct(
+                    $getProductByID->id,
+                    $name,
+                    $size,
+                    $price,
+                    $promtPrice,
+                    $getProductByID->id_url,
+                    $detail,
+                    $detailPromt,
+                    $idType,
+                    $status,
+                    $new,
+                    $deleted,
+                    $image
+                );
+
+                // Check update Product and create directory with images.
+                if ($updateProduct) {
+                    if ($_FILES["hinh"]["error"] == 0) {
+                        $kqa = move_uploaded_file($_FILES["hinh"]["tmp_name"],
+                            "../Public/source/images/products/$image");
                     }
-                    echo "<script>alert('Sửa thành công Sản phẩm')</script>";
+
+                    // Show messages edit success.
+                    echo "<script>alert(" . MESSAGE_EDIT_PRODUCT_SUCCESS . ")</script>";
                     echo "<script>window.location='product.php?alias=$getUrlType->url'</script>";
-
-
                 }
             }
         }
-        $title = "SỬA SẢN PHẨM ĐÈN LỒNG ";
-        $view  = "View/v_EditProduct.php";
-        include("include/admin.view.php");
+
+        //set title and view.
+        $title = TITLE_EDIT_PRODUCT;
+        $view = "View/v_EditProduct.php";
+        include(DIRECTORY_ADMIN_VIEW);
     }
 }
 

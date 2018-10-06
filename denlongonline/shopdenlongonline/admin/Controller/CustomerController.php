@@ -6,187 +6,216 @@
  * Time: 8:27 PM
  */
 include_once "Model/CustomerModel.php";
+include_once "Helper/constants.php";
 
 class CustomerController
 {
+
+
     function getListCustomer()
     {
-        $model           = new CustomerModel();
+
+        $model = new CustomerModel();
+
+        //get date from Model
         $getListCustomer = $model->getListCustomer();
-        // print_r($getListCustomer);die;
-        $title = "DANH SÁCH KHÁCH HÀNG";
-        $view  = "View/v_list-Customer.php";
-        include('include/admin.view.php');
+
+        // set view and title
+        $title = TITLE_LIST_CUSTOMERS;
+        $view = "View/v_list-Customer.php";
+        include(DIRECTORY_ADMIN_VIEW);
+
     }
 
     function deleteCustomer()
     {
-        $idCustomer   = $_POST['idCustomer'];
+        //get data from form with method POST
+        $idCustomer = $_POST['idCustomer'];
         $nameCustomer = $_POST['nameCustomer'];
-//        echo $nameCustomer;die;
-        $model          = new CustomerModel();
+
+        //get data from Model
+        $model = new CustomerModel();
         $deleteCustomer = $model->deleteCustomer($idCustomer);
-        if ($deleteCustomer)
-        {
-//                echo json_encode(array([
-//                    'status'=>"CẬP NHẬT TRẠNG THÁI XÓA KHÁCH HÀNG THÀNH CÔNG   "
-//                ]));
+
+        //check Exist Customer
+        if ($deleteCustomer) {
             echo json_encode([
-                'status' => "CẬP NHẬT XÓA KHÁCH HÀNG " . $nameCustomer . " THÀNH CÔNG"
+                'status' => MESSAGE_DELETE_SUCCESS
+            ]);
+        } else {
+            echo json_encode([
+                'status' => MESSAGE_DELETE_FAIL
             ]);
         }
-        else
-        {
-            echo json_encode([
-                'status' => "CẬP NHẬT XÓA KHÁCH HÀNG " . $nameCustomer . "THẤT BẠI"
-            ]);
-        }
-//        $view = "View/v_list-Customer.php";
-//        include('include/admin.view.php');
     }
 
     function rollBackCustomer()
     {
-        $idCustomer   = $_POST['idCustomer'];
+
+        //get date from form
+        $idCustomer = $_POST['idCustomer'];
         $nameCustomer = $_POST['nameCustomer'];
-//        echo $nameCustomer;die;
-        $model          = new CustomerModel();
+
+        //get data from Model
+        $model = new CustomerModel();
         $deleteCustomer = $model->rollBackCustomer($idCustomer);
-        if ($deleteCustomer)
-        {
+
+        //check Rollback customers Exist
+        if ($deleteCustomer) {
             echo json_encode([
-                'status' => "KHÔI PHỤC XÓA KHÁCH HÀNG " . $nameCustomer . " THÀNH CÔNG"
+                'status' => MESSAGE_ROLLBACK_CUSTOMSER_SUCCESS
             ]);
-        }
-        else
-        {
+        } else {
             echo json_encode([
-                'status' => "KHÔI PHỤC XÓA KHÁCH HÀNG " . $nameCustomer . "THẤT BẠI"
+                'status' => MESSAGE_ROLLBACK_CUSTOMER_FAIL
             ]);
         }
     }
 
     function getListDeleteCustomer()
     {
-        $model           = new CustomerModel();
+        // get data from Model
+        $model = new CustomerModel();
         $getListCustomer = $model->getListCustomerDel();
-        // print_r($getListCustomer);die;
-        $title = "DANH SÁCH KHÁCH HÀNG";
-        $view  = "View/v_list-delete-customer.php";
-        include('include/admin.view.php');
+
+        //set view and title
+        $title = TITLE_LIST_CUSTOMERS;
+        $view = "View/v_list-delete-customer.php";
+        include(DIRECTORY_ADMIN_VIEW);
     }
 
     function addCustomer()
     {
-        // Xử lý dữ liệu
+        // get data from Model
         $model = new CustomerModel();
-        // POST data từ Client về
-        if (isset($_POST['btn-AddCustomer']))
-        {
-            $email      = $_POST['email'];
-            $checkEmail = $model->findEmail($email);
-//            echo $email;
-            //  print_r($checkEmail);die;
-//            die;
 
-            if ($checkEmail)
-            {
-                // Mail trùng
-                echo "<script>alert('Email của bạn bị trùng - Vui lòng kiểm tra lại')</script>";
+        // check submit button AddCustomer with method POST
+        if (isset($_POST['btn-AddCustomer'])) {
+            $email = $_POST['email'];
+            $checkEmail = $model->findEmail($email);
+
+            //check Exist Email in database
+            if ($checkEmail) {
+                // Mail Exist
+                echo "<script>alert(" . MESSAGE_EXIST_EMAIL . ")</script>";
                 echo "<script>window.location='addcustomer.php?addcustomer=add'</script>";
                 return;
-            }
-            else
-            {
-                $name           = $_POST['name'];
-                $gender         = $_POST['gender'];
-                $address        = $_POST['address'];
-                $phone          = $_POST['phone'];
-                $note           = $_POST['note'];
+            } else {
+
+                // Mail not Exist and get data from form
+                $name = $_POST['name'];
+                $gender = $_POST['gender'];
+                $address = $_POST['address'];
+                $phone = $_POST['phone'];
+                $note = $_POST['note'];
+
+                //get functon from Model
                 $insertCustomer = $model->insertCustomer($name, $gender, $email, $address, $phone, $note);
-                if ($insertCustomer)
-                {
-                    echo "<script>alert('THÊM KHÁCH HÀNG THÀNH CÔNG ')</script>";
+
+                //check Exist Customer is true and allow insert
+                if ($insertCustomer) {
+                    echo "<script>alert(" . MESSAGE_ADD_CUSTOMER_SUCCESS . ")</script>";
                     echo "<script>window.location='addcustomer.php?addcustomer=add'</script>";
                     return;
-                }
-                else
-                {
-                    echo "<script>alert('THÊM KHÁCH HÀNG THẤT BẠI!')</script>";
+                } else {
+                    echo "<script>alert(" . MESSAGE_ADD_CUSTOMER_FAIL . ")</script>";
                     echo "<script>window.location='addcustomer.php?addcustomer=add'</script>";
                     return;
                 }
             }
-//           echo "<pre>"; var_dump($name); echo "</pre>"; die;
         }
-        // view
-        $title = "THÊM MỚI KHÁCH HÀNG ";
-        $view  = "View/v_addcustomer.php";
-        include("include/admin.view.php");
+
+        // set view and title
+        $title = TITLE_ADD_CUSTOMER;
+        $view = "View/v_addcustomer.php";
+        include(DIRECTORY_ADMIN_VIEW);
     }
 
     function editCustomer()
     {
-        $model         = new CustomerModel();
+        // get data from form with  method GET
         $getIDCustomer = $_GET['id'];
+        //get data from Model
+        $model = new CustomerModel();
         $checkCustomer = $model->findCustomer($getIDCustomer);
-        // echo "<pre>"; var_dump($checkCustomer); echo "</pre>"; die;
-        if (isset($_POST['btn-EditCustomer']))
-        {
-            $email      = $_POST['email'];
-           // $checkEmail = $model->findEmail($checkCustomer->email);
-//            echo $email;
-            //  print_r($checkEmail);die;
-//            die;
-            if ($checkCustomer->email == $email )
-            {
-                $name           = $_POST['name'];
-                $gender         = $_POST['gender'];
-                $address        = $_POST['address'];
-                $phone          = $_POST['phone'];
-                $note           = $_POST['note'];
-                $updateCustomer = $model->updateCustomer($getIDCustomer, $name, $gender, $email, $address, $phone, $note);
-                if ($updateCustomer)
-                {
-                    echo "<script>alert('CẬP NHẬT KHÁCH HÀNG THÀNH CÔNG ')</script>";
+
+        //check button submit with method POST
+        if (isset($_POST['btn-EditCustomer'])) {
+            $email = $_POST['email'];
+
+            //check email exist in database
+            if ($checkCustomer->email == $email) {
+
+                //True. get data from form
+                $name = $_POST['name'];
+                $gender = $_POST['gender'];
+                $address = $_POST['address'];
+                $phone = $_POST['phone'];
+                $note = $_POST['note'];
+
+                // call function updateCustomers in Model
+                $updateCustomer = $model->updateCustomer(
+                    $getIDCustomer,
+                    $name,
+                    $gender,
+                    $email,
+                    $address,
+                    $phone,
+                    $note
+                );
+
+                //check Update customer success/fail and show messages
+                if ($updateCustomer) {
+                    echo "<script>alert(" . MESSAGE_UPDATE_CUSTOMER_SUCCESS . ")</script>";
                     echo "<script>window.location='list-customers.php?getlistCustomer=Customer'</script>";
                     return;
-                }
-                else
-                {
-                    echo "<script>alert('CẬP NHẬT KHÁCH HÀNG THẤT BẠI ')</script>";
+                } else {
+                    echo "<script>alert(" . MESSAGE_UPDATE_CUSTOMER_FAIL . ")</script>";
                     echo "<script>window.location='list-customers.php?getlistCustomer=Customer'</script>";
                     return;
 
                 }
-            }
-            else
-            {
+            } else {
+
                 $checkEmail = $model->findEmail($email);
-                if ($checkEmail)
-                {
-                    // Mail trùng
-                    echo "<script>alert('Email của bạn bị trùng - Vui lòng kiểm tra lại')</script>";
+
+                // Check mail Exist
+                if ($checkEmail) {
+
+                    echo "<script>alert(" . MESSAGE_EXIST_EMAIL . ")</script>";
                     echo "<script>window.location='list-customers.php?getlistCustomer=Customer'</script>";
                     return;
-                }
-                else
-                {
-                    $name           = $_POST['name'];
-                    $gender         = $_POST['gender'];
-                    $address        = $_POST['address'];
-                    $phone          = $_POST['phone'];
-                    $note           = $_POST['note'];
-                    $updateCustomer = $model->updateCustomer($getIDCustomer, $name, $gender, $email, $address, $phone, $note);
-                    if ($updateCustomer)
-                    {
-                        echo "<script>alert('CẬP NHẬT KHÁCH HÀNG THÀNH CÔNG ')</script>";
+
+                } else {
+
+                    //get data from  form with  method POST
+                    $name = $_POST['name'];
+                    $gender = $_POST['gender'];
+                    $address = $_POST['address'];
+                    $phone = $_POST['phone'];
+                    $note = $_POST['note'];
+
+                    //get function from Model
+                    $updateCustomer = $model->updateCustomer(
+                        $getIDCustomer,
+                        $name,
+                        $gender,
+                        $email,
+                        $address,
+                        $phone,
+                        $note
+                    );
+
+                    // check update success/ fail and show messages
+                    if ($updateCustomer) {
+
+                        echo "<script>alert(" . MESSAGE_UPDATE_CUSTOMER_SUCCESS . ")</script>";
                         echo "<script>window.location='list-customers.php?getlistCustomer=Customer'</script>";
                         return;
-                    }
-                    else
-                    {
-                        echo "<script>alert('CẬP NHẬT KHÁCH HÀNG THẤT BẠI ')</script>";
+
+                    } else {
+
+                        echo "<script>alert(" . MESSAGE_UPDATE_CUSTOMER_FAIL . ")</script>";
                         echo "<script>window.location='list-customers.php?getlistCustomer=Customer'</script>";
                         return;
 
@@ -195,9 +224,9 @@ class CustomerController
 
             }
         }
-        $title = "CHỈNH SỬA KHÁCH HÀNG";
-        $view  = "View/v_editcustomer.php";
-        include("include/admin.view.php");
+        $title = TITLE_EDIT_CUSTOMER;
+        $view = "View/v_editcustomer.php";
+        include(DIRECTORY_ADMIN_VIEW);
 
     }
 }
