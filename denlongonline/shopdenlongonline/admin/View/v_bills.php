@@ -1,3 +1,7 @@
+<?php
+include_once "Helper/constants.php";
+?>
+
 <style>
     th {
         text-align: center;
@@ -12,23 +16,16 @@
 
 <div class="panel panel-default">
     <div class="panel-heading"><b>
-            <h4><?php echo $title; ?></h4>
+            <h4><?= $title ?></h4>
             <?php
-            if ($_GET['status'] == 0)
-            {
-                echo "ĐƠN HÀNG CHƯA THANH TOÁN";
-            }
-            elseif ($_GET['status'] == 1)
-            {
-                echo "ĐƠN HÀNG ĐÃ XÁC NHẬN";
-            }
-            elseif ($_GET['status'] == 2)
-            {
-                echo "ĐƠN HÀNG ĐÃ GIAO";
-            }
-            else
-            {
-                echo "ĐƠN HÀNG BỊ HỦY";
+            if ($_GET['status'] == STATUS_BILLS_NOT_APPROVAL) {
+                echo TITLE_BILL_NOT_APPROVALS;
+            } elseif ($_GET['status'] == STATUS_BILL_APPROVAL) {
+                echo TITLE_BILL_APPROVAL;
+            } elseif ($_GET['status'] == STATUS_BILLS_SEND_SUCCESS) {
+                echo TITLE_BILL_SEND_SUCCESS;
+            } else {
+                echo TITLE_BILL_CANCEL;
             }
             ?>
 
@@ -52,8 +49,7 @@
                 <th>Tổng tiền thanh toán</th>
                 <th>Note</th>
                 <?php
-                if ($_GET['status'] == 1)
-                {
+                if ($_GET['status'] == BUTTON_HIDDEN_ON) {
                     ?>
                     <th>Tuỳ chọn</th>
                 <?php } ?>
@@ -61,11 +57,10 @@
             </thead>
             <tbody>
             <?php
-            foreach ($getBillStatus as $bills)
-            {
+            foreach ($getBillStatus as $bills) {
                 ?>
                 <tr id="record">
-                    <td>DH000<?= $bills->id ?></td>
+                    <td><?= CODE_BILLS . $bills->id ?></td>
                     <td>
                         <?= $bills->fullname ?>
                         <br>
@@ -82,14 +77,14 @@
                     <td><?= number_format($bills->promt_price); ?> (VNĐ)</td>
                     <td><?= $bills->note; ?></td>
                     <?php
-                    if ($_GET['status'] == 1)
-                    {
+                    if ($_GET['status'] == BUTTON_HIDDEN_ON) {
                         ?>
                         <td>
                             <button class="btn btn-primary btn-sm updateBill"
                                     type="submit" data-id="<?= $bills->id; ?>">Đã giao
                             </button>
-                            <button class="btn btn-default btn-sm cancelBill"  type="submit" data-idHuy="<?= $bills->id; ?>">Huỷ
+                            <button class="btn btn-default btn-sm cancelBill" type="submit"
+                                    data-idHuy="<?= $bills->id; ?>">Huỷ
                             </button>
                         </td>
                         <?php
@@ -102,9 +97,23 @@
 
             </tbody>
         </table>
-        <!--        </form>-->
+
     </div>
 </div>
+
+<?php
+/**
+ * AJAX and JQUERY CHECK Bills
+ * get status with bills and chaged status bills
+ * status changed bills status with Button.
+ *
+ * STATUS BILL
+ * status bills not approval : 0;
+ * status bills approval : 1
+ * status bills send success : 2
+ * status bills send fail : 3
+ */
+?>
 <script src="Public/source/js/jquery.js"></script>
 <script>
     $(document).ready(function () {

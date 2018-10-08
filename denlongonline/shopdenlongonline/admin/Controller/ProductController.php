@@ -1,20 +1,18 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Phan Thông  IT
- * Date: 2018-07-25
- * Time: 6:06 AM
- */
+
 include_once "Model/ProductModel.php";
 include_once "Helper/String/trimUrl.php";
 include_once "Helper/constants.php";
 
+/**
+ * Class ProductController
+ */
 class ProductController
 {
 
     /**
      * function getProductByType
-     *
+     * Use alias with method GET from form
      */
     function getProductByType()
     {
@@ -107,6 +105,34 @@ class ProductController
 
             // get alias product with method POST
             $url = $_POST['urlproduct'];
+
+            $data = [];
+            // Validation
+            if (empty($url)) {
+                $data[] = MESSAGES_NOT_NULL_URL . "\n";
+            }
+
+            if( empty($_POST['nameproduct'])) {
+                $data[] = MESSAGES_NOT_NULL_NAMEPRODUCT . "\n";
+            }
+
+            if(empty($_POST['promt_product'])) {
+                $data[] = MESSAGES_NOT_NULL_PROMOTION . "\n";
+            }
+
+            if(empty($_POST['priceproduct'])) {
+                $data[] = MESSAGES_NOT_NULL_PRICE . "\n";
+            }
+
+            if(empty($_POST['detailproduct'])) {
+                $data[] = MESSAGES_NOT_NULL_DETAIL . "\n";
+            }
+
+            if(empty($_POST['promotion_price'])) {
+                $data[] = MESSAGE_NOT_NULL_DETAIL_PROMOTION . "\n";
+            }
+
+            // get and control alias
             $pregUrl = utf8convert($url);
             $lowerUrl = strtolower(str_replace(' ', '', $pregUrl));
             $checkIdUrl = $model->insertUrl($lowerUrl);
@@ -152,10 +178,8 @@ class ProductController
                     }
 
                     //Show message success and redirect
-                    echo "<script>alert(" . MESSAGE_ADD_PRODUCT_SUCCESS .")</script>";
+                    echo "<script>alert(" . MESSAGE_ADD_PRODUCT_SUCCESS . ")</script>";
                     echo "<script>window.location='product.php?alias=$getUrlType->url'</script>";
-
-
                 }
             }
         }
@@ -244,6 +268,4 @@ class ProductController
         include(DIRECTORY_ADMIN_VIEW);
     }
 }
-
-?>
 

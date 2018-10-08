@@ -1,12 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Phan Thông  IT
- * Date: 2018-07-25
- * Time: 6:07 AM
- */
+
 include_once 'Controller/ProductController.php';
 
+/**
+ * Routes with method GET
+ */
 $view = new ProductController();
 if(isset($_GET['alias'])){
     $view->getProductByType();

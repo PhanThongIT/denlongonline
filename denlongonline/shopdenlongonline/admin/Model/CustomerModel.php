@@ -8,6 +8,9 @@
 include "DBConnect.php";
 include_once "Helper/constants.php";
 
+/**
+ * Class CustomerModel
+ */
 class CustomerModel extends DBConnect
 {
 
@@ -168,6 +171,9 @@ class CustomerModel extends DBConnect
         $note
     )
     {
+        // set delete flag is OFF\
+        $flagDelete = DELETE_FLAG_OFF;
+
         $sql = "
         UPDATE customers
         SET 
@@ -177,7 +183,7 @@ class CustomerModel extends DBConnect
             address= '$address', 
             phone= '$phone', 
             note= '$note', 
-            status =0 
+            status = $flagDelete
         WHERE id = $id; 
 ";
         return $this->executeQuery($sql);

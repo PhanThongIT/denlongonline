@@ -1,13 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Phan Thông  IT
- * Date: 2018-07-27
- * Time: 8:27 PM
- */
 include_once "Model/CustomerModel.php";
 include_once "Helper/constants.php";
 
+/**
+ * Class CustomerController
+ */
 class CustomerController
 {
 

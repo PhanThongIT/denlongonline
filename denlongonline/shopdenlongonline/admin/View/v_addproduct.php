@@ -20,6 +20,14 @@
 <div class="panel panel-default">
     <div class="panel-heading"><b>
             <h4 style="font-size: 20px ;color: black"><?php echo $title; ?> </h4>
+            <?php
+            if (isset($data)) {
+                foreach ($data as $key => $values) { ?>
+              <div class="alert-danger" style="text-align: center"> <?php echo $values; ?> </div>
+             <?php   }
+                unset($data);
+            }
+            ?>
         </b>
     </div>
     <div class="panel-body">
@@ -30,7 +38,7 @@
                     <li class="row">
                         <div class="col-sm-6">
                             <label>Tên Sản Phẩm</label>
-                            <input type="text" name="nameproduct" class="input form-control" id="nameproduct" required>
+                            <input type="text" name="nameproduct" class="input form-control" id="nameproduct">
                         </div><!--/ [col] -->
                         <div class="col-sm-6">
 
@@ -55,7 +63,7 @@
 
                             <label class="required">Đơn Giá (Chưa khuyến mãi)</label>
                             <input class="input form-control " type="number" name="priceproduct" id="priceproduct"
-                                   value="" >
+                                   value="">
 
                         </div><!--/ [col] -->
                         <div class="col-sm-6">
@@ -73,13 +81,13 @@
 
                             <label class="required">Mô Tả Khuyến Mãi</label>
                             <textarea class="input form-control " cols="50" rows="3" name="promotion_price"
-                                      id="promotion_price" required></textarea>
+                                      id="promotion_price"></textarea>
 
                         </div><!--/ [col] -->
                         <div class="col-sm-6">
                             <label class="required">Mô Tả Sản Phẩm</label>
                             <textarea cols="50" rows="3" class="input form-control" name="detailproduct"
-                                      id="detailproduct" required></textarea>
+                                      id="detailproduct"></textarea>
                         </div><!--/ [col] -->
                     </li><!--/ .row -->
                     <li class="row">
@@ -123,7 +131,7 @@
 
                             <div class="col-sm-6">
                                 <input type="text" class="input form-control" name="urlproduct" id="urlproduct"
-                                       required>
+                                >
                             </div>
                             <div class="col-sm-6">
                                 <input type="text" class="input form-control" name="resulturl" id="resulturl" value=""
@@ -200,6 +208,4 @@
         });
     })
 </script>
-
-
 

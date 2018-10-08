@@ -1,13 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Phan Thông  IT
- * Date: 2018-07-25
- * Time: 6:07 AM
- */
-
+include_once "Helper/constants.php";
 
 ?>
+
 <style>
     th {
         text-align: center;
@@ -42,8 +37,7 @@
             </thead>
             <tbody>
             <?php
-            foreach ($selectProductByType as $bills)
-            {
+            foreach ($selectProductByType as $bills) {
                 ?>
                 <tr id="record">
                     <td id-product="<?= $bills->id ?>"><h5 style="margin-top: 35px;">SP000<?= $bills->id ?> </h5></td>
@@ -63,15 +57,15 @@
                     </td>
                     <td>
                         <input style="margin-top: 35px;" type="checkbox"
-                               disabled <?php if ($bills->status == 1) { ?> checked <?php } ?> >
+                               disabled <?php if ($bills->status == SPECIAL_PRODUCT) { ?> checked <?php } ?> >
                     </td>
                     <td>
                         <input style="margin-top: 35px;" type="checkbox"
-                               disabled <?php if ($bills->new == 1) { ?> checked <?php } ?>>
+                               disabled <?php if ($bills->new == NEW_PRODUCT) { ?> checked <?php } ?>>
                     </td>
                     <td>
                         <input style="margin-top: 35px;" type="checkbox"
-                               disabled <?php if ($bills->deleted == 1) { ?> checked <?php } ?>>
+                               disabled <?php if ($bills->deleted == DELETE_FLAG_ON) { ?> checked <?php } ?>>
                     </td>
                     <td>
                         <button type="button" style="margin-top: 10px;" class="btn btn-danger btn-sm btn-deletePr"
@@ -92,13 +86,22 @@
     </div>
 </div>
 
+<?php
+/**
+ * AJAX and JQUERY
+ * function delete Products
+ * get data product with id product
+ * send COntroller and changed status
+ */
+?>
 <script src="Public/source/js/jquery.js"></script>
 <script>
     $(document).ready(function () {
-        // Xử lý việc xóa 1 item product
-        $('.btn-deletePr').click(function () {
+        // Check submit Button and get data
+        $('.btn-deletePr').click(function ()
+        {
             var idProduct = $(this).attr('id-product');
-            // console.log(idItem);
+
             $.ajax({
                 url: 'deleteproduct.php',
                 type: 'POST',
@@ -109,7 +112,6 @@
                 success: function (response) {
                     $('#status').html(response.status);
                     $('#record').remove();
-                    // console.log(response);
                 },
                 error: function (error) {
                     console.log(error);
