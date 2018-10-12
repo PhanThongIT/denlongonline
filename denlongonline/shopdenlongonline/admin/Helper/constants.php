@@ -88,6 +88,8 @@ const BUTTON_HIDDEN_ON = 1;
 const CODE_BILLS = "DH000";
 
 // status Bills
+
+// status Bills
 const STATUS_BILLS_NOT_APPROVAL = 0;
 const STATUS_BILL_APPROVAL = 1;
 const STATUS_BILLS_SEND_SUCCESS = 2 ;
