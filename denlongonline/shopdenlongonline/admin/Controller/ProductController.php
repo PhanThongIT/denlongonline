@@ -112,23 +112,23 @@ class ProductController
                 $data[] = MESSAGES_NOT_NULL_URL . "\n";
             }
 
-            if( empty($_POST['nameproduct'])) {
+            if (empty($_POST['nameproduct'])) {
                 $data[] = MESSAGES_NOT_NULL_NAMEPRODUCT . "\n";
             }
 
-            if(empty($_POST['promt_product'])) {
+            if (empty($_POST['promt_product'])) {
                 $data[] = MESSAGES_NOT_NULL_PROMOTION . "\n";
             }
 
-            if(empty($_POST['priceproduct'])) {
+            if (empty($_POST['priceproduct'])) {
                 $data[] = MESSAGES_NOT_NULL_PRICE . "\n";
             }
 
-            if(empty($_POST['detailproduct'])) {
+            if (empty($_POST['detailproduct'])) {
                 $data[] = MESSAGES_NOT_NULL_DETAIL . "\n";
             }
 
-            if(empty($_POST['promotion_price'])) {
+            if (empty($_POST['promotion_price'])) {
                 $data[] = MESSAGE_NOT_NULL_DETAIL_PROMOTION . "\n";
             }
 

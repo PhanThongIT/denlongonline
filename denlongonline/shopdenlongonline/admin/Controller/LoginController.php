@@ -8,14 +8,26 @@ include_once "Helper/constants.php";
 class LoginController
 {
 
+
     /**
-     * GetLogin with button submit / method POST
+     * getLogin().
      */
     function getLogin()
     {
 
         // check btnSubmit with  method POST
         if (isset($_POST['btn-login'])) {
+
+            // check null data get method POST
+            if (empty($_POST['email'])) {
+                $_SESSION["error"] = MESSAGE_NULL_EMAIL_LOGIN;
+                header('location:login.php');
+            }
+
+            if (empty($_POST['password'])) {
+                $_SESSION["error"] = MESSAGE_NULL_EMAIL_LOGIN;
+                header('location:login.php');
+            }
 
             //get username and password with method POST
             $email = $_POST['email'];

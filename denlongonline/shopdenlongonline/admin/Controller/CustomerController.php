@@ -1,6 +1,8 @@
 <?php
-include_once "Model/CustomerModel.php";
+require_once "Model/CustomerModel.php";
 include_once "Helper/constants.php";
+
+session_start();
 
 /**
  * Class CustomerController
@@ -83,21 +85,46 @@ class CustomerController
 
     function addCustomer()
     {
+
         // get data from Model
         $model = new CustomerModel();
 
+        // Arrays Errors get Empty data
+        $Errors = [];
+
         // check submit button AddCustomer with method POST
         if (isset($_POST['btn-AddCustomer'])) {
+
+            if (empty($_POST['email'])) {
+                $Errors[] = MESSAGE_NOT_NULL_EMAIL . "\n";
+            }
             $email = $_POST['email'];
             $checkEmail = $model->findEmail($email);
 
             //check Exist Email in database
             if ($checkEmail) {
                 // Mail Exist
-                echo "<script>alert(" . MESSAGE_EXIST_EMAIL . ")</script>";
+                $_SESSION['exist_mail'] = MESSAGE_EXIST_EMAIL;
                 echo "<script>window.location='addcustomer.php?addcustomer=add'</script>";
                 return;
             } else {
+
+                // Check empty data
+                if (empty($_POST['name'])) {
+                    $Errors[] = MESSAGE_NOT_NULL_NAME . "\n";
+                }
+
+                if (empty($_POST['address'])) {
+                    $Errors[] = MESSAGE_NOT_NULL_ADDRESS . "\n";
+                }
+
+                if (empty($_POST['phone'])) {
+                    $Errors[] = MESSAGE_NOT_NULL_PHONE . "\n";
+                }
+
+                if (empty($_POST['note'])) {
+                    $Errors[] = MESSAGE_NOT_NULL_NOTE . "\n";
+                }
 
                 // Mail not Exist and get data from form
                 $name = $_POST['name'];
@@ -111,11 +138,12 @@ class CustomerController
 
                 //check Exist Customer is true and allow insert
                 if ($insertCustomer) {
-                    echo "<script>alert(" . MESSAGE_ADD_CUSTOMER_SUCCESS . ")</script>";
+                    $_SESSION['result'] = MESSAGE_ADD_CUSTOMER_SUCCESS;
                     echo "<script>window.location='addcustomer.php?addcustomer=add'</script>";
                     return;
                 } else {
-                    echo "<script>alert(" . MESSAGE_ADD_CUSTOMER_FAIL . ")</script>";
+
+                    $_SESSION['result'] = MESSAGE_ADD_CUSTOMER_FAIL;
                     echo "<script>window.location='addcustomer.php?addcustomer=add'</script>";
                     return;
                 }
@@ -163,11 +191,12 @@ class CustomerController
 
                 //check Update customer success/fail and show messages
                 if ($updateCustomer) {
-                    echo "<script>alert(" . MESSAGE_UPDATE_CUSTOMER_SUCCESS . ")</script>";
+
+                    $_SESSION['success'] = MESSAGE_UPDATE_CUSTOMER_SUCCESS;
                     echo "<script>window.location='list-customers.php?getlistCustomer=Customer'</script>";
                     return;
                 } else {
-                    echo "<script>alert(" . MESSAGE_UPDATE_CUSTOMER_FAIL . ")</script>";
+                    $_SESSION['success'] = MESSAGE_UPDATE_CUSTOMER_FAIL;
                     echo "<script>window.location='list-customers.php?getlistCustomer=Customer'</script>";
                     return;
 

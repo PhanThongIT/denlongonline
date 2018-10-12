@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Phan Thông  IT
- * Date: 2018-07-27
- * Time: 8:30 PM
- */
-
 ?>
 <style>
     th {
@@ -23,6 +16,13 @@
     <div class="panel-heading" style="text-align: center"><b>
             <h4><?php echo $title; ?></h4>
         </b>
+
+        <?php
+        if( isset($_SESSION['success'])) {
+            echo $_SESSION['success'];
+            unset($_SESSION['success']);
+        }
+        ?>
 
 
     </div>
